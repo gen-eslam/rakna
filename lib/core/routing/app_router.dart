@@ -4,6 +4,7 @@ import 'package:rakna/core/routing/page_name.dart';
 import 'package:rakna/features/auth/login/view/login_view.dart';
 import 'package:rakna/features/auth/sign_up/view/sign_up_view.dart';
 import 'package:rakna/features/home_layout/view/home_layout_view.dart';
+import 'package:rakna/features/search/ui/view/search_view.dart';
 import 'package:rakna/features/splash/view/splash_view.dart';
 
 abstract class AppRouter {
@@ -24,6 +25,12 @@ abstract class AppRouter {
       path: PageName.kHomeLayoutView,
       pageBuilder: (context, state) => transitionFunction(
         page: const HomeLayoutView(),
+      ),
+    ),
+     GoRoute(
+      path: PageName.kSearchView,
+      pageBuilder: (context, state) => transitionFunction(
+        page: const SearchView(),
       ),
     ),
   ]);

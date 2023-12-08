@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeApp.light(context),
           darkTheme: ThemeApp.dark(context),
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
         ),
       ),
     );

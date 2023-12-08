@@ -5,6 +5,7 @@ import 'package:rakna/core/theme/manager/colors_manager.dart';
 
 abstract class ThemeApp {
   static ThemeData light(BuildContext context) => ThemeData(
+        primaryColor: ColorsManager.bluishClr,
         scaffoldBackgroundColor: ColorsManager.offWhite,
         brightness: Brightness.light,
         fontFamily: GoogleFonts.aBeeZee().fontFamily,
@@ -42,6 +43,7 @@ abstract class ThemeApp {
       );
   //dark theme
   static ThemeData dark(BuildContext context) => ThemeData(
+    
         scaffoldBackgroundColor: ColorsManager.darkBlue,
         primaryColor: ColorsManager.bluishClr,
         brightness: Brightness.dark,
@@ -71,7 +73,6 @@ abstract class ThemeApp {
           backgroundColor: ColorsManager.bluishClr,
           selectedItemColor: ColorsManager.white,
           showUnselectedLabels: false,
-          
           unselectedItemColor: ColorsManager.white.withOpacity(0.7),
           type: BottomNavigationBarType.fixed,
         ),

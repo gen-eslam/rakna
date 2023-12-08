@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakna/features/home_layout/data/home_layout_repo.dart';
-import 'package:rakna/features/location/location_view/ui/location_view.dart';
+import 'package:rakna/features/location/ui/location_view.dart';
 
 part 'home_layout_state.dart';
 

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rakna/core/helper/extensions.dart';
 import 'package:rakna/core/routing/page_name.dart';
+import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_elevated_button.dart';
+import 'package:rakna/core/widgets/custom_text.dart';
 import 'package:rakna/features/auth/sign_up/view/widgets/sign_up_form_section.dart';
 
 class SignUpView extends StatelessWidget {
@@ -39,9 +41,10 @@ class SignUpView extends StatelessWidget {
                 ),
                 CustomElevatedButton(
                   onPressed: () {},
-                  child: Text(
-                    StringManager.signUp,
+                  child: CustomText(
+                    text: StringManager.signUp,
                     style: TextStyleManager.textStyle15w500,
+                    color: ColorsManager.white,
                   ),
                 ),
                 SizedBox(
@@ -52,7 +55,11 @@ class SignUpView extends StatelessWidget {
                   child: RichText(
                       text: TextSpan(
                           text: StringManager.alreadyHaveAccount,
-                          style: TextStyleManager.textStyle15w400,
+                          style: TextStyleManager.textStyle15w400.copyWith(
+                            color: context.isDarkMode
+                                ? ColorsManager.white
+                                : ColorsManager.black,
+                          ),
                           children: [
                         TextSpan(
                             recognizer: TapGestureRecognizer()
@@ -60,7 +67,11 @@ class SignUpView extends StatelessWidget {
                                 context.pop();
                               },
                             text: StringManager.signIn,
-                            style: TextStyleManager.textStyle15w700)
+                            style: TextStyleManager.textStyle15w700.copyWith(
+                              color: context.isDarkMode
+                                  ? ColorsManager.white
+                                  : ColorsManager.black,
+                            ))
                       ])),
                 )
               ],

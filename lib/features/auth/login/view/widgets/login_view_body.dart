@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rakna/core/helper/extensions.dart';
 import 'package:rakna/core/routing/page_name.dart';
+import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/space_Manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_elevated_button.dart';
+import 'package:rakna/core/widgets/custom_text.dart';
 import 'package:rakna/features/auth/login/view/widgets/login_form_section.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -25,8 +27,8 @@ class LoginViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            StringManager.signIn,
+          CustomText(
+            text: StringManager.signIn,
             style: TextStyleManager.textStyle30w700
                 .copyWith(color: context.theme.primaryColor),
           ),
@@ -51,9 +53,10 @@ class LoginViewBody extends StatelessWidget {
             onPressed: () {
               context.push(PageName.kHomeLayoutView);
             },
-            child: Text(
-              StringManager.signIn,
+            child: CustomText(
+              text: StringManager.signIn,
               style: TextStyleManager.textStyle15w500,
+              color: ColorsManager.white,
             ),
           ),
           SizedBox(
@@ -64,7 +67,11 @@ class LoginViewBody extends StatelessWidget {
             child: RichText(
                 text: TextSpan(
                     text: StringManager.dontHaveAccount,
-                    style: TextStyleManager.textStyle15w400,
+                    style: TextStyleManager.textStyle15w400.copyWith(
+                      color: context.isDarkMode
+                          ? ColorsManager.white
+                          : ColorsManager.black,
+                    ),
                     children: [
                   TextSpan(
                       recognizer: TapGestureRecognizer()
@@ -72,7 +79,11 @@ class LoginViewBody extends StatelessWidget {
                           context.push(PageName.kSignUpView);
                         },
                       text: StringManager.signUp,
-                      style: TextStyleManager.textStyle15w700)
+                      style: TextStyleManager.textStyle15w700.copyWith(
+                        color: context.isDarkMode
+                            ? ColorsManager.white
+                            : ColorsManager.black,
+                      ))
                 ])),
           )
         ],

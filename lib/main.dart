@@ -35,9 +35,9 @@ class MyApp extends StatelessWidget {
           title: StringManager.appName,
           routerConfig: AppRouter.router,
           debugShowCheckedModeBanner: false,
-          theme: ThemeApp.light,
-          darkTheme: ThemeApp.dark,
-          themeMode: ThemeMode.dark,
+          theme: ThemeApp.light(context),
+          darkTheme: ThemeApp.dark(context),
+          themeMode: ThemeMode.light,
         ),
       ),
     );

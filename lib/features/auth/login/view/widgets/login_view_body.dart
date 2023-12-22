@@ -51,6 +51,7 @@ class LoginViewBody extends StatelessWidget {
           ),
           CustomElevatedButton(
             onPressed: () {
+              // ThemeCubit.get(context).changeTheme();
               context.push(PageName.kHomeLayoutView);
             },
             child: CustomText(
@@ -79,11 +80,8 @@ class LoginViewBody extends StatelessWidget {
                           context.push(PageName.kSignUpView);
                         },
                       text: StringManager.signUp,
-                      style: TextStyleManager.textStyle15w700.copyWith(
-                        color: context.isDarkMode
-                            ? ColorsManager.white
-                            : ColorsManager.black,
-                      ))
+                      style: TextStyleManager.textStyle15w700
+                          .copyWith(color: context.theme.primaryColor))
                 ])),
           )
         ],

@@ -1,105 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rakna/core/helper/extensions.dart';
+import 'package:rakna/core/theme/manager/text_style_manager.dart';
+import 'package:rakna/core/widgets/custom_text.dart';
 
-class AnimatedListView extends StatefulWidget {
-  const AnimatedListView({Key? key}) : super(key: key);
+class AnimatedListViewItem extends StatefulWidget {
+  final int index;
+  const AnimatedListViewItem({Key? key, required this.index}) : super(key: key);
 
   @override
-  State<AnimatedListView> createState() => _AnimatedListViewState();
+  State<AnimatedListViewItem> createState() => _AnimatedListViewItemState();
 }
 
-class _AnimatedListViewState extends State<AnimatedListView> {
+class _AnimatedListViewItemState extends State<AnimatedListViewItem> {
   double screenHeight = 0;
   double screenWidth = 0;
 
   bool startAnimation = false;
-
-  List<String> texts = [
-    "Monetization",
-    "Pie Chart",
-    "Flag",
-    "Notification",
-    "Savings",
-    "Cloud",
-    "Nightlight",
-    "Assignment",
-    "Location",
-    "Settings",
-    "Rocket",
-    "Backpack",
-    "Person",
-    "Done All",
-    "Search",
-    "Extension",
-    "Bluetooth",
-    "Favorite",
-    "Lock",
-    "Bookmark",
-    "Monetization",
-    "Pie Chart",
-    "Flag",
-    "Notification",
-    "Savings",
-    "Cloud",
-    "Nightlight",
-    "Assignment",
-    "Location",
-    "Settings",
-    "Rocket",
-    "Backpack",
-    "Person",
-    "Done All",
-    "Search",
-    "Extension",
-    "Bluetooth",
-    "Favorite",
-    "Lock",
-    "Bookmark"
-        "Monetization",
-    "Pie Chart",
-    "Flag",
-    "Notification",
-    "Savings",
-    "Cloud",
-    "Nightlight",
-    "Assignment",
-    "Location",
-    "Settings",
-    "Rocket",
-    "Backpack",
-    "Person",
-    "Done All",
-    "Search",
-    "Extension",
-    "Bluetooth",
-    "Favorite",
-    "Lock",
-    "Bookmark"
-  ];
-
-  List<IconData> icons = [
-    Icons.monetization_on,
-    Icons.pie_chart,
-    Icons.flag,
-    Icons.notifications,
-    Icons.savings,
-    Icons.cloud,
-    Icons.nightlight_round,
-    Icons.assignment,
-    Icons.location_pin,
-    Icons.settings,
-    Icons.rocket,
-    Icons.backpack,
-    Icons.person,
-    Icons.done_all,
-    Icons.search,
-    Icons.extension,
-    Icons.bluetooth,
-    Icons.favorite,
-    Icons.lock,
-    Icons.bookmark,
-  ];
 
   @override
   void initState() {
@@ -116,20 +33,10 @@ class _AnimatedListViewState extends State<AnimatedListView> {
   Widget build(BuildContext context) {
     screenHeight = context.deviceHeight;
     screenWidth = context.deviceWidth;
-
-    return ListView.builder(
-      itemCount: texts.length,
-      itemBuilder: (context, index) {
-        return item(index);
-      },
-    );
-  }
-
-  Widget item(int index) {
     return AnimatedContainer(
       width: screenWidth,
       curve: Curves.easeInOut,
-      duration: Duration(milliseconds: 300 + (index * 200)),
+      duration: Duration(milliseconds: 300 + (widget.index * 200)),
       transform:
           Matrix4.translationValues(startAnimation ? 0 : screenWidth, 0, 0),
       margin: EdgeInsets.only(
@@ -139,23 +46,41 @@ class _AnimatedListViewState extends State<AnimatedListView> {
         horizontal: screenWidth / 20,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "${index + 1}. ${texts[index]}",
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                shape: BoxShape.rectangle,
+              ),
+              child: Image.network(
+                "https://static.wikia.nocookie.net/characterprofile/images/c/c8/BotW_Link.png/revision/latest?cb=20170306180639",
+                scale: 1 / 1,
+                fit: BoxFit.contain,
+                height: 60.r,
+                width: 60.r,
+              ),
             ),
-          ),
-          // Icon(
-          //   icons[index],
-          // ),
-        ],
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomText(
+                    text: "Link",
+                    style: TextStyleManager.textStyle14w600,
+                  ),
+                  CustomText(
+                    text: "10 garage",
+                    style: TextStyleManager.textStyle12w400,
+                  )
+                ]),
+          ],
+        ),
       ),
     );
   }

@@ -12,7 +12,7 @@ extension ColorExtension on String {
     }
   }
 }
-extension ThemeApp on BuildContext {
+extension GetThemeApp on BuildContext {
 
   ThemeData get theme => Theme.of(this);
  

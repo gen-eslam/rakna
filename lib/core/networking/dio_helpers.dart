@@ -13,7 +13,7 @@ class DioHelper {
     dio = Dio(
       BaseOptions(
         //Here the URL of API.
-        //  baseUrl: EndPoints.baseUrl,
+        // baseUrl: EndPoints.baseUrl,
         connectTimeout: const Duration(minutes: 2),
         receiveDataWhenStatusError: true,
         //Here we Put The Headers Needed in The API.
@@ -108,7 +108,7 @@ class DioHelper {
     String? token,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
-    String? ContentType,
+    String? contentType,
   }) async {
     dio.options.headers = {
       'Authorization': 'Bearer ${token ?? ''}',
@@ -249,4 +249,8 @@ class DioHelper {
     };
     return await dio.download(url, savePath);
   }
+
 }
+
+
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rakna/core/helper/extensions.dart';
+import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/utils/space_Manager.dart';
 
 class CustomTextFormFeild extends StatelessWidget {
@@ -20,7 +21,11 @@ class CustomTextFormFeild extends StatelessWidget {
       decoration: InputDecoration(
         hintText: text,
         labelText: text,
-        prefixIcon: Icon(prefixIcon),
+        alignLabelWithHint: true,
+        floatingLabelStyle: TextStyle(
+          color: context.isDarkMode ? ColorsManager.white : ColorsManager.black,
+        ),
+        prefixIcon: Icon(prefixIcon, color: context.theme.primaryColor),
         border: border(context),
         enabledBorder: border(context),
         focusedBorder: border(context),

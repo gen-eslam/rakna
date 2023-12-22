@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class TextStyleManager {
-
   static final TextStyle textStyle34w700 = TextStyle(
     fontSize: 34.sp,
     fontWeight: FontWeight.w700,
@@ -26,5 +25,13 @@ abstract class TextStyleManager {
   static final TextStyle textStyle15w700 = TextStyle(
     fontSize: 15.sp,
     fontWeight: FontWeight.w700,
+  );
+  static final TextStyle textStyle14w600 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static final TextStyle textStyle12w400 = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
   );
 }

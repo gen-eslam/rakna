@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rakna/core/helper/extensions.dart';
 import 'package:rakna/features/search/ui/widget/animated_list_view.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -27,7 +26,11 @@ class SearchView extends StatelessWidget {
             print('switched to: $index');
           },
         ),
-        const Expanded(child: AnimatedListView()),
+        const AnimatedListViewItem(
+          index: 0,
+        )
+        // const Expanded(
+        //     child: ),
       ]),
     );
   }

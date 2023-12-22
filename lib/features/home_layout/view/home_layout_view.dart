@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:rakna/features/home_layout/view/widgets/home_layout_app_bar.dart';
@@ -13,19 +14,21 @@ class HomeLayoutView extends StatelessWidget {
 
     return Scaffold(
       appBar: const HomeLayoutAppBar(),
-      body: PageView.builder(
-        controller: cubit.pageController,
-        physics: const BouncingScrollPhysics(),
-        itemCount: cubit.screens.length,
-        onPageChanged: (value) {
-          cubit.changePage(index: value);
-        },
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.all(15.r),
-            child: cubit.screens[cubit.currentIndex],
-          );
-        },
+      body: BlocBuilder<HomeLayoutCubit, HomeLayoutState>(
+        builder: (context, state) => PageView.builder(
+          controller: cubit.pageController,
+          physics: const BouncingScrollPhysics(),
+          itemCount: cubit.screens.length,
+          onPageChanged: (value) {
+            cubit.changePage(index: value);
+          },
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.all(15.r),
+              child: cubit.screens[cubit.currentIndex],
+            );
+          },
+        ),
       ),
       bottomNavigationBar: const HomeLayoutBottomNavBar(),
     );

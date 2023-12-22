@@ -15,8 +15,9 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: PageName.kLoginView,
-      builder: (context, state) => const LoginView(),
+      builder: (context, state) => const LoginView(), 
     ),
+
     GoRoute(
       path: PageName.kSignUpView,
       builder: (context, state) => const SignUpView(),

@@ -8,6 +8,7 @@ abstract class ThemeApp {
         primaryColor: ColorsManager.bluishClr,
         scaffoldBackgroundColor: ColorsManager.offWhite,
         brightness: Brightness.light,
+        useMaterial3: false,
         fontFamily: GoogleFonts.aBeeZee().fontFamily,
 
         // app bar theme
@@ -27,6 +28,13 @@ abstract class ThemeApp {
               bottomRight: Radius.circular(15),
             )),
             backgroundColor: ColorsManager.bluishClr),
+        textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+          overlayColor: MaterialStateColor.resolveWith(
+              (states) => ColorsManager.bluishClr.withOpacity(0.3)),
+          foregroundColor: MaterialStateColor.resolveWith(
+              (states) => ColorsManager.bluishClr),
+        )),
 
         // bottom nav bar theme
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -43,11 +51,10 @@ abstract class ThemeApp {
       );
   //dark theme
   static ThemeData dark(BuildContext context) => ThemeData(
-    
         scaffoldBackgroundColor: ColorsManager.darkBlue,
         primaryColor: ColorsManager.bluishClr,
         brightness: Brightness.dark,
-        textTheme: GoogleFonts.aBeeZeeTextTheme(Theme.of(context).textTheme),
+        useMaterial3: false,
 
         // app bar theme
         appBarTheme: AppBarTheme(

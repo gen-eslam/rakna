@@ -526,7 +526,7 @@ packages:
     source: hosted
     version: "3.7.3"
   pretty_dio_logger:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: pretty_dio_logger
       sha256: "00b80053063935cf9a6190da344c5373b9d0e92da4c944c878ff2fbef0ef6dc2"

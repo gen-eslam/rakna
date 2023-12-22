@@ -68,9 +68,7 @@ class SignUpView extends StatelessWidget {
                               },
                             text: StringManager.signIn,
                             style: TextStyleManager.textStyle15w700.copyWith(
-                              color: context.isDarkMode
-                                  ? ColorsManager.white
-                                  : ColorsManager.black,
+                              color: context.theme.primaryColor,
                             ))
                       ])),
                 )

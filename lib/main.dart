@@ -41,11 +41,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-            create: (context) => SettingCubit(settingRepo: SettingRepoImpl())..getThemeMode(),
+            create: (context) =>
+                SettingCubit(settingRepo: getIt.get<SettingRepoImpl>())
+                  ..getThemeMode(),
           ),
         ],
-        child: BlocBuilder<SettingCubit, SettingState>(
-          builder: (context, state) {
+        child:
+            BlocBuilder<SettingCubit, SettingState>(builder: (context, state) {
           return MaterialApp.router(
             title: StringManager.appName,
             routerConfig: AppRouter.router,

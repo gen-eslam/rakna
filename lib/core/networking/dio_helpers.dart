@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:rakna/core/services/cache_helper.dart';
+import 'package:rakna/core/services/cache_service.dart';
 
 //Dio Helper That's Connect and Talk to API.
 class DioHelper {
@@ -28,14 +28,14 @@ class DioHelper {
         InterceptorsWrapper(
           onRequest: (options, handle) async {
             options.headers['Authorization'] =
-                'Bearer ${CacheHelper.getDataString(key: 'token')}';
+                'Bearer ${CacheService.getDataString(key: 'token')}';
             return handle.next(options);
           },
           onError: (error, handle) {
             if (error.response!.data['message'] ==
                     "You are not authenticated" &&
                 error.response!.statusCode == 401) {
-              CacheHelper.clearData();
+              CacheService.clearData();
               // Get.offAllNamed(PageName.LOG_IN);
             }
             return handle.next(error);
@@ -249,8 +249,4 @@ class DioHelper {
     };
     return await dio.download(url, savePath);
   }
-
 }
-
-
-

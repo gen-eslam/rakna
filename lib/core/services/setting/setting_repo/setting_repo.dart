@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rakna/core/helper/keys.dart';
-import 'package:rakna/core/services/cache_helper.dart';
+import 'package:rakna/core/services/cache_service.dart';
 
 abstract class SettingRepo {
   ThemeMode getThemeMode();
@@ -11,22 +11,22 @@ abstract class SettingRepo {
 class SettingRepoImpl implements SettingRepo {
   @override
   ThemeMode getThemeMode() {
-   return isDarkMode() ? ThemeMode.dark : ThemeMode.light;
+    return isDarkMode() ? ThemeMode.dark : ThemeMode.light;
   }
 
   @override
   ThemeMode changeTheme() {
     if (isDarkMode()) {
-      CacheHelper.put(key: Keys.isDarkMode, value: false);
+      CacheService.put(key: Keys.isDarkMode, value: false);
       return ThemeMode.light;
     } else {
-      CacheHelper.put(key: Keys.isDarkMode, value: true);
+      CacheService.put(key: Keys.isDarkMode, value: true);
       return ThemeMode.dark;
     }
   }
 
   @override
   bool isDarkMode() {
-    return CacheHelper.getDataBool(key: Keys.isDarkMode) ?? false;
+    return CacheService.getDataBool(key: Keys.isDarkMode) ?? false;
   }
 }

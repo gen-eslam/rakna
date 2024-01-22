@@ -6,6 +6,10 @@ abstract class Failures {
   const Failures(this.errorMessage);
 }
 
+class LocationFailures extends Failures {
+  LocationFailures(String errorMessage) : super(errorMessage);
+}
+
 class ServerFailure extends Failures {
   ServerFailure(String errorMessage) : super(errorMessage);
 

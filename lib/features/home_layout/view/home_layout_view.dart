@@ -17,7 +17,8 @@ class HomeLayoutView extends StatelessWidget {
       body: BlocBuilder<HomeLayoutCubit, HomeLayoutState>(
         builder: (context, state) => PageView.builder(
           controller: cubit.pageController,
-          physics: const BouncingScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
+          
           itemCount: cubit.screens.length,
           onPageChanged: (value) {
             cubit.changePage(index: value);

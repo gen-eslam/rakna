@@ -5,15 +5,20 @@ class CustomText extends StatelessWidget {
   final TextStyle style;
   final Color? color;
   final String text;
+  final TextAlign textAlign;
   const CustomText(
-      {super.key, required this.text, this.color, required this.style});
+      {super.key,
+      required this.text,
+      this.color,
+      required this.style,
+      this.textAlign = TextAlign.center});
 
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
-        
-      style: TextStyle(color: context.isDarkMode ? Colors.white : Colors.black,
-
+      textAlign: textAlign,
+      style: TextStyle(
+        color: context.isDarkMode ? Colors.white : Colors.black,
       ),
       child: Text(
         text,

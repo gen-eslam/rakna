@@ -1,8 +1,7 @@
-
 //CacheHelper That's Connect and Talk to local database.
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CacheHelper {
+class CacheService {
   //Here The Initialize of cache .
   static late SharedPreferences sharedPreferences;
 
@@ -36,11 +35,13 @@ class CacheHelper {
   }) {
     return sharedPreferences.getString(key);
   }
+
   static int? getInt({
     required String key,
   }) {
     return sharedPreferences.getInt(key);
   }
+
   static bool? getDataBool({
     required String key,
   }) {

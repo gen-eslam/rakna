@@ -27,4 +27,5 @@ abstract class StringManager {
   // LOCATION VIEW
   static const String nearestLocation = "Nearest Location";
   static const String searchByCity = "Search by City";
+  static const String retry = "try again";
 }

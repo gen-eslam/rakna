@@ -25,7 +25,7 @@ class HomeLayoutCubit extends Cubit<HomeLayoutState> {
   ];
   List screens = [
     const LocationView(),
-    const LocationView(),
+    const SettingView(),
     const SettingView(),
   ];
   int currentIndex = 0;

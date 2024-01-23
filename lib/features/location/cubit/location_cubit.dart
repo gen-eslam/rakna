@@ -16,22 +16,20 @@ class LocationCubit extends Cubit<LocationState> {
 
   late Position position;
   late CameraPosition cameraPosition;
+  Completer<GoogleMapController> mapController = Completer();
 
   Future<void> initPositionAndCamera() async {
     var result = await locationRepo.getCurrentPosition();
-    result
-        .fold((failuer) => emit(LocationFailure(message: failuer.errorMessage)),
-            (sucess) {
+    result.fold(
+        (failuer) => emit(
+              LocationFailure(
+                message: failuer.errorMessage,
+              ),
+            ), (sucess) {
       position = sucess;
+      cameraPosition = locationRepo.getCameraPosition(sucess);
       emit(
-        LocationSuccess(
-          position: sucess,
-          cameraPosition: CameraPosition(
-            target: LatLng(sucess.latitude, sucess.longitude),
-            zoom: 17,
-            bearing: 0.0,
-          ),
-        ),
+        LocationSuccess(),
       );
     });
   }
@@ -41,8 +39,14 @@ class LocationCubit extends Cubit<LocationState> {
     result
         .fold((failuer) => emit(LocationFailure(message: failuer.errorMessage)),
             (sucess) {
-      print("///////////////////calllllllllll");
       initPositionAndCamera();
+    });
+  }
+
+  void goToMyCurrentLocation() async {
+    await mapController.future.then((value) {
+      value.animateCamera(
+          locationRepo.updateCameraPosition(cameraPosition: cameraPosition));
     });
   }
 }

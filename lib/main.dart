@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rakna/core/dependency_injection/dependency_injection.dart';
 import 'package:rakna/core/networking/dio_helpers.dart';
 import 'package:rakna/core/networking/payment_aPi_helper.dart';
 import 'package:rakna/core/routing/app_router.dart';
+import 'package:rakna/core/services/bloc_observer.dart';
 import 'package:rakna/core/services/cache_service.dart';
 import 'package:rakna/core/services/setting/cubit/setting_cubit.dart';
 import 'package:rakna/core/services/setting/setting_repo/setting_repo.dart';
@@ -20,6 +22,11 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await CacheService.init();
   DioHelper.init();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  Bloc.observer = MyBlocObserver();
   PaymentApiHelper.init();
 
   dependencyInjectionSetup();
@@ -49,6 +56,8 @@ class MyApp extends StatelessWidget {
                   ..getThemeMode(),
           ),
           BlocProvider(
+
+              // lazy: false,
               create: (context) =>
                   LocationCubit(locationRepo: getIt.get<LocationRepoImpl>())
                     ..initPositionAndCamera()),

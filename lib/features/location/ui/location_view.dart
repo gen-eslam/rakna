@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
@@ -13,10 +10,22 @@ import 'package:rakna/core/widgets/custom_error.dart';
 import 'package:rakna/core/widgets/custom_loading.dart';
 import 'package:rakna/core/widgets/custom_text.dart';
 import 'package:rakna/features/location/cubit/location_cubit.dart';
-import 'package:rakna/features/location/ui/widget/custom_location_search.dart';
 
-class LocationView extends StatelessWidget {
+class LocationView extends StatefulWidget {
   const LocationView({super.key});
+
+  @override
+  State<LocationView> createState() => _LocationViewState();
+}
+
+class _LocationViewState extends State<LocationView> {
+  late LocationCubit cubit;
+
+  @override
+  void didChangeDependencies() {
+    cubit = LocationCubit.get(context);
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +34,7 @@ class LocationView extends StatelessWidget {
         clipBehavior: Clip.none,
         alignment: AlignmentDirectional.topCenter,
         children: [
-          BlocBuilder<LocationCubit, LocationState>(builder: (context, state) {
+          BlocBuilder<LocationCubit, LocationState>(builder: (_, state) {
             if (state is LocationFailure) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -40,20 +49,20 @@ class LocationView extends StatelessWidget {
                         color: ColorsManager.white,
                       ),
                       onPressed: () async {
-                         LocationCubit.get(context).requestPermission();
+                        LocationCubit.get(context).requestPermission();
                       }),
                 ],
               );
             } else if (state is LocationSuccess) {
               return GoogleMap(
-                initialCameraPosition: state.cameraPosition,
+                initialCameraPosition: cubit.cameraPosition,
                 myLocationEnabled: true,
                 myLocationButtonEnabled: false,
                 zoomControlsEnabled: false,
                 mapType: MapType.normal,
                 onMapCreated: (GoogleMapController controller) {
-                  if (!state.mapController.isCompleted) {
-                    state.mapController.complete(controller);
+                  if (!cubit.mapController.isCompleted) {
+                    cubit.mapController.complete(controller);
                   }
                 },
               );
@@ -61,7 +70,17 @@ class LocationView extends StatelessWidget {
               return const CustomLoading();
             }
           }),
-          const CustomLocationSearch(),
+          // const CustomLocationSearch(),
+          Positioned(
+            right: 5.r,
+            bottom: 10.r,
+            child: GestureDetector(
+              onTap: () => cubit.goToMyCurrentLocation(),
+              child: const CircleAvatar(
+                child: Icon(Icons.location_on),
+              ),
+            ),
+          ),
         ]);
   }
 }

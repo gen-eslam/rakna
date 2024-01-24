@@ -22,7 +22,7 @@ class LocationService {
       }
       return Right(await checkLocationPermission());
     } catch (e) {
-      return Left(LocationFailures(e.toString()));
+      return Left(LocalFailures(e.toString()));
     }
   }
 
@@ -33,7 +33,7 @@ class LocationService {
           : await Geolocator.requestPermission();
       return Right(await Geolocator.getCurrentPosition());
     } catch (e) {
-      return Left(LocationFailures(e.toString()));
+      return Left(LocalFailures(e.toString()));
     }
   }
 }

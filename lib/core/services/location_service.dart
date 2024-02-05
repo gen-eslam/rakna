@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:location/location.dart';
 import 'package:rakna/core/error/failure.dart';
 
 class LocationService {
+  static Location location = Location();
   static Future<bool> checkLocationPermission() async {
-    LocationPermission object = await Geolocator.checkPermission();
+    PermissionStatus object = await location.hasPermission();
     switch (object) {
-      case LocationPermission.whileInUse || LocationPermission.always:
-        print("trueeeeeeeeeeeeeeeeeeeee");
+      case PermissionStatus.granted:
         return true;
       default:
         return false;
@@ -18,20 +17,19 @@ class LocationService {
   static Future<Either<Failures, bool>> requestPermission() async {
     try {
       if (!await checkLocationPermission()) {
-        await openAppSettings();
-      }
+await location.requestPermission();      }
       return Right(await checkLocationPermission());
     } catch (e) {
       return Left(LocalFailures(e.toString()));
     }
   }
 
-  static Future<Either<Failures, Position>> getCurrentPosition() async {
+  static Future<Either<Failures, LocationData>> getCurrentPosition() async {
     try {
       await checkLocationPermission()
           ? null
-          : await Geolocator.requestPermission();
-      return Right(await Geolocator.getCurrentPosition());
+          : await location.requestPermission();
+      return Right(await location.getLocation());
     } catch (e) {
       return Left(LocalFailures(e.toString()));
     }

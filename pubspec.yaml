@@ -40,13 +40,12 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
-  geolocator: ^10.1.0
   get_it: ^7.6.4
   go_router: ^12.1.1
   google_fonts: ^6.1.0
   google_maps_flutter: ^2.5.2
+  location: ^5.0.3
   lottie: ^2.7.0
-  permission_handler: ^10.4.5
   salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.2.2
   sqflite: ^2.3.0
@@ -73,6 +72,7 @@ flutter:
   assets:
     - assets/images/
     - assets/animation/
+    - assets/google_map_style/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

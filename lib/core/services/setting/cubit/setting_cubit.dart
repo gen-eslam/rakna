@@ -15,6 +15,10 @@ class SettingCubit extends Cubit<SettingState> {
     themeMode = settingRepo.getThemeMode();
   }
 
+  bool isDarkMode() {
+    return settingRepo.isDarkMode();
+  }
+
   void changeTheme() {
     themeMode = settingRepo.changeTheme();
     emit(ChangeTheme());

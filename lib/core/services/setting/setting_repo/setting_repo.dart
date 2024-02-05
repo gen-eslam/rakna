@@ -5,6 +5,7 @@ import 'package:rakna/core/services/cache_service.dart';
 abstract class SettingRepo {
   ThemeMode getThemeMode();
   ThemeMode changeTheme();
+  Future<String> loadMapStyle({required BuildContext context});
   bool isDarkMode();
 }
 
@@ -28,5 +29,11 @@ class SettingRepoImpl implements SettingRepo {
   @override
   bool isDarkMode() {
     return CacheService.getDataBool(key: Keys.isDarkMode) ?? false;
+  }
+
+  @override
+  Future<String> loadMapStyle({required BuildContext context}) async {
+    return await DefaultAssetBundle.of(context)
+        .loadString("assets/google_map_style/night_google_map.json");
   }
 }

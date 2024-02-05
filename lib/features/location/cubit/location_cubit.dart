@@ -1,22 +1,26 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
+import 'package:rakna/core/services/setting/setting_repo/setting_repo.dart';
 import 'package:rakna/features/location/data/location_repo.dart';
 
 part 'location_state.dart';
 
 class LocationCubit extends Cubit<LocationState> {
-  LocationCubit({required this.locationRepo}) : super(LocationInitial());
+  LocationCubit({required this.locationRepo, required this.settingRepo})
+      : super(LocationInitial());
 
   static LocationCubit get(context) => BlocProvider.of<LocationCubit>(context);
 
   LocationRepo locationRepo;
+  SettingRepo settingRepo;
 
-  late Position position;
+  late LocationData position;
   late CameraPosition cameraPosition;
-  Completer<GoogleMapController> mapController = Completer();
+  late GoogleMapController mapController;
 
   Future<void> initPositionAndCamera() async {
     var result = await locationRepo.getCurrentPosition();
@@ -43,10 +47,24 @@ class LocationCubit extends Cubit<LocationState> {
     });
   }
 
-  void goToMyCurrentLocation() async {
-    await mapController.future.then((value) {
-      value.animateCamera(
-          locationRepo.updateCameraPosition(cameraPosition: cameraPosition));
-    });
+  void goToMyCurrentLocation() {
+    mapController.animateCamera(
+      locationRepo.updateCameraPosition(cameraPosition: cameraPosition),
+    );
+  }
+
+  void changeMapStyle(String style) {
+    if (settingRepo.isDarkMode()) {
+      print("///////////////////////////////////////////////true");
+      mapController.setMapStyle(style);
+    } else {
+      mapController.setMapStyle("[]");
+    }
+  }
+
+  @override
+  Future<void> close() {
+    mapController.dispose();
+    return super.close();
   }
 }

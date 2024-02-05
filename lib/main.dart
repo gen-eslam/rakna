@@ -56,11 +56,11 @@ class MyApp extends StatelessWidget {
                   ..getThemeMode(),
           ),
           BlocProvider(
-
               // lazy: false,
-              create: (context) =>
-                  LocationCubit(locationRepo: getIt.get<LocationRepoImpl>())
-                    ..initPositionAndCamera()),
+              create: (context) => LocationCubit(
+                  locationRepo: getIt.get<LocationRepoImpl>(),
+                  settingRepo: getIt.get<SettingRepoImpl>())
+                ..initPositionAndCamera()),
         ],
         child:
             BlocBuilder<SettingCubit, SettingState>(builder: (context, state) {
@@ -70,6 +70,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeApp.light(context),
             darkTheme: ThemeApp.dark(context),
+            // themeMode: ThemeMode.dark,
             themeMode: SettingCubit.get(context).themeMode,
           );
         }),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rakna/core/services/setting/cubit/setting_cubit.dart';
 import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
@@ -20,10 +21,14 @@ class LocationView extends StatefulWidget {
 
 class _LocationViewState extends State<LocationView> {
   late LocationCubit cubit;
+  late String style;
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     cubit = LocationCubit.get(context);
+    style = await LocationCubit.get(context)
+        .settingRepo
+        .loadMapStyle(context: context);
     super.didChangeDependencies();
   }
 
@@ -55,27 +60,27 @@ class _LocationViewState extends State<LocationView> {
               );
             } else if (state is LocationSuccess) {
               return GoogleMap(
-                initialCameraPosition: cubit.cameraPosition,
-                myLocationEnabled: true,
-                myLocationButtonEnabled: false,
-                zoomControlsEnabled: false,
-                mapType: MapType.normal,
-                onMapCreated: (GoogleMapController controller) {
-                  if (!cubit.mapController.isCompleted) {
-                    cubit.mapController.complete(controller);
-                  }
-                },
-              );
+                  initialCameraPosition: cubit.cameraPosition,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  zoomControlsEnabled: false,
+                  mapType: MapType.normal,
+                  onMapCreated: (GoogleMapController controller) {
+                    cubit.mapController = controller;
+                    cubit.changeMapStyle(style);
+                    cubit.goToMyCurrentLocation();
+                  });
             } else {
               return const CustomLoading();
             }
           }),
-          // const CustomLocationSearch(),
           Positioned(
             right: 5.r,
             bottom: 10.r,
             child: GestureDetector(
-              onTap: () => cubit.goToMyCurrentLocation(),
+              onTap: () {
+                cubit.goToMyCurrentLocation();
+              },
               child: const CircleAvatar(
                 child: Icon(Icons.location_on),
               ),

@@ -1,19 +1,20 @@
 import 'package:dartz/dartz.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:rakna/core/error/failure.dart';
 import 'package:rakna/core/services/location_service.dart';
 
 abstract class LocationRepo {
-  Future<Either<Failures, Position>> getCurrentPosition();
+  Future<Either<Failures, LocationData>> getCurrentPosition();
   Future<Either<Failures, bool>> requestPermission();
-  CameraPosition getCameraPosition(Position position);
+
+  CameraPosition getCameraPosition(LocationData locationData);
   CameraUpdate updateCameraPosition({required CameraPosition cameraPosition});
 }
 
 class LocationRepoImpl extends LocationRepo {
   @override
-  Future<Either<Failures, Position>> getCurrentPosition() async {
+  Future<Either<Failures, LocationData>> getCurrentPosition() async {
     return await LocationService.getCurrentPosition();
   }
 
@@ -23,9 +24,9 @@ class LocationRepoImpl extends LocationRepo {
   }
 
   @override
-  CameraPosition getCameraPosition(Position position) {
+  CameraPosition getCameraPosition(LocationData locationData) {
     return CameraPosition(
-      target: LatLng(position.latitude, position.longitude),
+      target: LatLng(locationData.latitude!, locationData.longitude!),
       zoom: 17,
       bearing: 0.0,
     );

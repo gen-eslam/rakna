@@ -17,17 +17,14 @@ class HomeLayoutView extends StatelessWidget {
       body: BlocBuilder<HomeLayoutCubit, HomeLayoutState>(
         builder: (context, state) => PageView.builder(
           controller: cubit.pageController,
+          padEnds: false,
           physics: const NeverScrollableScrollPhysics(),
-          
           itemCount: cubit.screens.length,
           onPageChanged: (value) {
             cubit.changePage(index: value);
           },
           itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.all(15.r),
-              child: cubit.screens[cubit.currentIndex],
-            );
+            return cubit.screens[cubit.currentIndex];
           },
         ),
       ),

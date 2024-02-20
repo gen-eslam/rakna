@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:rakna/core/services/setting/cubit/setting_cubit.dart';
 import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
@@ -10,7 +9,7 @@ import 'package:rakna/core/widgets/custom_elevated_button.dart';
 import 'package:rakna/core/widgets/custom_error.dart';
 import 'package:rakna/core/widgets/custom_loading.dart';
 import 'package:rakna/core/widgets/custom_text.dart';
-import 'package:rakna/features/location/cubit/location_cubit.dart';
+import 'package:rakna/features/location/logic/cubit/location_cubit.dart';
 
 class LocationView extends StatefulWidget {
   const LocationView({super.key});
@@ -54,21 +53,21 @@ class _LocationViewState extends State<LocationView> {
                         color: ColorsManager.white,
                       ),
                       onPressed: () async {
-                        LocationCubit.get(context).requestPermission();
+                        // LocationCubit.get(context).requestPermission();
                       }),
                 ],
               );
             } else if (state is LocationSuccess) {
               return GoogleMap(
-                  initialCameraPosition: cubit.cameraPosition,
+                  initialCameraPosition:
+                      const CameraPosition(target: LatLng(0, 0), zoom: 0),
                   myLocationEnabled: true,
                   myLocationButtonEnabled: false,
                   zoomControlsEnabled: false,
                   mapType: MapType.normal,
                   onMapCreated: (GoogleMapController controller) {
-                    cubit.mapController = controller;
-                    cubit.changeMapStyle(style);
-                    cubit.goToMyCurrentLocation();
+                    cubit.setMapController(controller);
+                    cubit.getMyCurrentPosition();
                   });
             } else {
               return const CustomLoading();
@@ -79,7 +78,7 @@ class _LocationViewState extends State<LocationView> {
             bottom: 10.r,
             child: GestureDetector(
               onTap: () {
-                cubit.goToMyCurrentLocation();
+                cubit.getMyCurrentPosition();
               },
               child: const CircleAvatar(
                 child: Icon(Icons.location_on),

@@ -14,8 +14,8 @@ import 'package:rakna/core/theme/theme_app.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/features/home_layout/data/home_layout_repo.dart';
 import 'package:rakna/features/home_layout/logic/home_layout_cubit.dart';
-import 'package:rakna/features/location/cubit/location_cubit.dart';
 import 'package:rakna/features/location/data/location_repo.dart';
+import 'package:rakna/features/location/logic/cubit/location_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

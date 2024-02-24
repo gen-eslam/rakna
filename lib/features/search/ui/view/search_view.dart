@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:rakna/core/helper/extensions.dart';
-import 'package:rakna/features/search/ui/widget/animated_list_view.dart';
-import 'package:toggle_switch/toggle_switch.dart';
+import 'package:rakna/core/theme/manager/text_style_manager.dart';
+import 'package:rakna/core/utils/space_Manager.dart';
+import 'package:rakna/core/utils/string_manager.dart';
+import 'package:rakna/core/widgets/custom_back_button.dart';
+import 'package:rakna/core/widgets/custom_text.dart';
+import 'package:rakna/core/widgets/custom_text_form_fieild.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
@@ -10,28 +13,52 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search'),
+        leading: const CustomBackButton(),
+        title: const Text(StringManager.search),
       ),
-      body: Column(children: [
-        ToggleSwitch(
-          initialLabelIndex: 0,
-          animate: true,
-          customWidths: [context.deviceWidth * 0.3, context.deviceWidth * 0.3],
-          totalSwitches: 2,
-          labels: const [
-            'City',
-            'Nearst Place',
-          ],
-          onToggle: (index) {
-            print('switched to: $index');
-          },
-        ),
-        const AnimatedListViewItem(
-          index: 0,
-        )
-        // const Expanded(
-        //     child: ),
-      ]),
+      body: Padding(
+        padding: EdgeInsetsDirectional.all(AppPadding.p16),
+        child: const Column(children: [
+          SerchBar(),
+        ]),
+      ),
+    );
+  }
+}
+
+class SerchBar extends StatelessWidget {
+  const SerchBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IntrinsicHeight(
+      child: Row(
+        children: [
+          const Expanded(
+            flex: 4,
+            child: CustomTextFormFeild(
+              text: StringManager.searchByCity,
+              prefixIcon: Icons.search,
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                elevation: 0,
+              ),
+              onPressed: () {},
+              child: CustomText(
+                text: StringManager.nearestLocation,
+                style: TextStyleManager.textStyle12w400,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -13,6 +13,7 @@ abstract class ThemeApp {
 
         // app bar theme
         appBarTheme: AppBarTheme(
+          
             centerTitle: true,
             elevation: 0,
             titleTextStyle: TextStyle(
@@ -22,11 +23,11 @@ abstract class ThemeApp {
               fontSize: 16.sp,
               fontStyle: FontStyle.italic,
             ),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-            )),
+            // shape: const RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.only(
+            //   bottomLeft: Radius.circular(15),
+            //   bottomRight: Radius.circular(15),
+            // ),),
             backgroundColor: ColorsManager.bluishClr),
         textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
@@ -67,11 +68,12 @@ abstract class ThemeApp {
               fontSize: 16.sp,
               fontStyle: FontStyle.italic,
             ),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-            )),
+            // shape: const RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.only(
+            //     bottomLeft: Radius.circular(15),
+            //     bottomRight: Radius.circular(15),
+            //   ),
+            // ),
             backgroundColor: ColorsManager.bluishClr),
 
         // bottom nav bar theme

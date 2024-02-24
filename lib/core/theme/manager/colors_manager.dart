@@ -12,4 +12,6 @@ abstract class ColorsManager {
   static const Color offWhite = Color(0xFFf5f5f5);
   static const Color green = Color(0xFF56BB61);
   static const Color darkGreen = Color(0xff04AF70);
+  static const Color gray = Color(0xffC0C0C8);
+  static const Color darkBlueShade = Color.fromARGB(207, 32, 51, 85);
 }

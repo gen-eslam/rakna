@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/features/home_layout/logic/home_layout_cubit.dart';
 
 class HomeLayoutAppBar extends StatelessWidget implements PreferredSizeWidget {

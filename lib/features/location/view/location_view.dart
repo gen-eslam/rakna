@@ -53,7 +53,7 @@ class _LocationViewState extends State<LocationView> {
                         color: ColorsManager.white,
                       ),
                       onPressed: () async {
-                        // LocationCubit.get(context).requestPermission();
+                        cubit.getMyCurrentLocation();
                       }),
                 ],
               );
@@ -67,7 +67,7 @@ class _LocationViewState extends State<LocationView> {
                   mapType: MapType.normal,
                   onMapCreated: (GoogleMapController controller) {
                     cubit.setMapController(controller);
-                    cubit.getMyCurrentPosition();
+                    cubit.getRealTimeLocation();
                   });
             } else {
               return const CustomLoading();
@@ -78,7 +78,7 @@ class _LocationViewState extends State<LocationView> {
             bottom: 10.r,
             child: GestureDetector(
               onTap: () {
-                cubit.getMyCurrentPosition();
+                cubit.getMyCurrentLocation();
               },
               child: const CircleAvatar(
                 child: Icon(Icons.location_on),

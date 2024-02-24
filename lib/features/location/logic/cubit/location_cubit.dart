@@ -16,8 +16,8 @@ class LocationCubit extends Cubit<LocationState> {
   LocationRepo locationRepo;
   SettingRepo settingRepo;
 
-  Future<void> initPositionAndCamera() async {
-    var result = await locationRepo.initPositionAndCamera();
+  Future<void> checkAndRequestLocationPermission() async {
+    var result = await locationRepo.checkAndRequestLocationPermission();
     result.fold(
         (failuer) => emit(
               LocationFailure(
@@ -37,8 +37,15 @@ class LocationCubit extends Cubit<LocationState> {
         (sucess) => null); // todo remove print
   }
 
-  void getMyCurrentPosition() async {
-    var result = await locationRepo.getMyCurrentPosition();
+  void getMyCurrentLocation() async {
+    var result = await locationRepo.getMyCurrentLocation();
+    result.fold(
+        (failuer) => emit(LocationFailure(message: failuer.errorMessage)),
+        (sucess) => null); // todo remove print
+  }
+
+  void getRealTimeLocation() async {
+    var result = await locationRepo.getRealTimeLocation();
     result.fold(
         (failuer) => emit(LocationFailure(message: failuer.errorMessage)),
         (sucess) => null); // todo remove print

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rakna/core/helper/extensions.dart';
-import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/utils/space_Manager.dart';
 
 class CustomElevatedButton extends StatelessWidget {

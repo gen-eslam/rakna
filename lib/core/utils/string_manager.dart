@@ -1,6 +1,7 @@
 abstract class StringManager {
   static const String appName = "Rakna";
   static const String location = "Location";
+  static const String home = "Home";
   static const String qrCode = "Qr Code";
   static const String settings = "Settings";
 
@@ -28,4 +29,6 @@ abstract class StringManager {
   static const String nearestLocation = "Nearest Location";
   static const String searchByCity = "Search by City";
   static const String retry = "try again";
+  static const String search = "Search";
+  static const String whereTo = "Where To";
 }

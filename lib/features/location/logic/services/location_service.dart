@@ -2,40 +2,65 @@ import 'package:location/location.dart';
 
 class LocationService {
   final Location _location = Location();
-  // late LocationData locationData;
-  Future<bool> init() async {
-    bool isServiceEnable = await checkAndRequestLocationService();
-    bool isPermissionEnable = await checkAndRequestLocationPermission();
-    if (isPermissionEnable && isServiceEnable) {
-      return true;
-    }
-    return false;
+  late LocationData locationData;
+  LocationService() {
+    _location.changeSettings(
+      distanceFilter: 2,
+      accuracy: LocationAccuracy.navigation,
+    );
+  }
+  Future<void> checkLocationServiceAndPermission() async {
+    await checkAndRequestLocationService();
+    await checkAndRequestLocationPermission();
   }
 
-  Future<bool> checkAndRequestLocationService() async {
+  Future<void> checkAndRequestLocationService() async {
     bool isServiceEnabled = await _location.serviceEnabled();
     if (!isServiceEnabled) {
       isServiceEnabled = await _location.requestService();
       if ((!isServiceEnabled)) {
-        return false;
+        throw LocationServiceException();
       }
     }
-    return true;
   }
 
-  Future<bool> checkAndRequestLocationPermission() async {
+  Future<void> checkAndRequestLocationPermission() async {
     PermissionStatus permissionStatus = await _location.hasPermission();
     if (permissionStatus == PermissionStatus.deniedForever) {
-      return false;
+      throw LocationPermissionException();
     }
     if (permissionStatus == PermissionStatus.denied) {
       permissionStatus = await _location.requestPermission();
-      return permissionStatus == PermissionStatus.granted;
+      if (permissionStatus != PermissionStatus.granted) {
+        throw LocationPermissionException();
+      }
     }
-    return true;
   }
 
-  void getRealTimeLocation(void Function(LocationData)? onData) {
+  Future<void> getLocation() async {
+    await checkAndRequestLocationPermission();
+    locationData = await _location.getLocation();
+  }
+
+  void getRealTimeLocation(void Function(LocationData)? onData) async {
+    await checkAndRequestLocationPermission();
+
     _location.onLocationChanged.listen(onData);
+  }
+}
+
+class LocationServiceException implements Exception {
+
+  @override
+  String toString() {
+    return 'Service Not Enabled';
+  }
+}
+
+class LocationPermissionException implements Exception {
+
+  @override
+  String toString() {
+    return 'Permission Not Granted';
   }
 }

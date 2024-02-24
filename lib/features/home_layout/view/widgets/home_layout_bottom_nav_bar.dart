@@ -22,9 +22,9 @@ class HomeLayoutBottomNavBar extends StatelessWidget {
             },
             items: [
               SalomonBottomBarItem(
-                icon: const Icon(Icons.location_on),
+                icon: const Icon(Icons.home),
                 title: CustomText(
-                  text: StringManager.location,
+                  text: StringManager.home,
                   style: TextStyleManager.textStyle15w500,
                 ),
               ),

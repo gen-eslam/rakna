@@ -29,7 +29,24 @@ class SearchView extends StatelessWidget {
           Expanded(
             child: ListView.separated(
                 itemBuilder: (context, index) {
-                  return const ListViewItem();
+                  return Column(
+                    children: [
+                      const ListViewItem(),
+                      Visibility(
+                        visible: false,
+                        child: Container(
+                          padding: EdgeInsetsDirectional.all(20.r),
+                          height: 300.r,
+                          child: ListView.separated(
+                              itemBuilder: (context, index) =>
+                                  const ListViewItem(),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 10.r),
+                              itemCount: 5),
+                        ),
+                      ),
+                    ],
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(

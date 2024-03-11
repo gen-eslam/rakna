@@ -3,157 +3,246 @@ import 'package:dio/dio.dart';
 abstract class Failures {
   final String errorMessage;
 
-  const Failures(this.errorMessage);
+  const Failures({required this.errorMessage});
 }
 
 class LocalFailures extends Failures {
-  LocalFailures(String errorMessage) : super(errorMessage);
+  LocalFailures({required super.errorMessage});
 }
 
 class ServerFailure extends Failures {
-  ServerFailure(String errorMessage) : super(errorMessage);
+  ServerFailure({required super.errorMessage});
 
   factory ServerFailure.fromDioError(DioException dioExceptionErrorType) {
     switch (dioExceptionErrorType.type) {
       case DioExceptionType.connectionTimeout:
-        return ServerFailure("Connection TimeOut");
+        return ServerFailure(errorMessage: "Connection TimeOut");
       case DioExceptionType.receiveTimeout:
-        return ServerFailure("receive Timeout");
+        return ServerFailure(errorMessage: "receive Timeout");
       case DioExceptionType.sendTimeout:
-        return ServerFailure("send Timeout");
+        return ServerFailure(errorMessage: "send Timeout");
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
             dioExceptionErrorType.response!.statusCode!,
-            dioExceptionErrorType.response!.data);
+            dioExceptionErrorType.response!);
       case DioExceptionType.cancel:
-        return ServerFailure("Request was cancelled ");
+        return ServerFailure(errorMessage: "Request was cancelled ");
       case DioExceptionType.unknown:
         if (dioExceptionErrorType.message!.contains("SocketException")) {
-          return ServerFailure("No Internet Connection");
+          return ServerFailure(errorMessage: "No Internet Connection");
         } else {
-          return ServerFailure("UnExpected Error , Please try again");
+          return ServerFailure(
+              errorMessage: "UnExpected Error , Please try again");
         }
       default:
-        return ServerFailure("Oops UnExpected Error ");
+        return ServerFailure(errorMessage: "Oops UnExpected Error ");
     }
   }
 
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     switch (statusCode) {
       case 400:
-        return ServerFailure("Bad Request: ${response["error"]["message"]}");
+        return ServerFailure(
+            errorMessage: "Bad Request: ${response.data["message"]}");
       case 401:
-        return ServerFailure("Unauthorized: ${response["error"]["message"]}");
+        return ServerFailure(
+            errorMessage: "Unauthorized: ${response.data["message"]}");
       case 402:
         return ServerFailure(
-            "Payment Required: Payment is required to access this resource.");
+            errorMessage:
+                "Payment Required: Payment is required to access this resource.");
       case 403:
-        return ServerFailure("Forbidden: ${response["error"]["message"]}");
+        return ServerFailure(errorMessage: "Forbidden: ${response.data}");
       case 404:
-        return ServerFailure("Not Found: Your request was not found.");
+        return ServerFailure(
+            errorMessage: "Not Found: Your request was not found.");
       case 405:
         return ServerFailure(
-            "Method Not Allowed: This HTTP method is not supported for this resource.");
+            errorMessage:
+                "Method Not Allowed: This HTTP method is not supported for this resource.");
       case 406:
         return ServerFailure(
-            "Not Acceptable: The requested resource cannot produce the content in the format specified.");
+            errorMessage:
+                "Not Acceptable: The requested resource cannot produce the content in the format specified.");
       case 407:
         return ServerFailure(
-            "Proxy Authentication Required: You must authenticate with the proxy server.");
+            errorMessage:
+                "Proxy Authentication Required: You must authenticate with the proxy server.");
       case 408:
         return ServerFailure(
-            "Request Timeout: The server timed out waiting for the request.");
+            errorMessage:
+                "Request Timeout: The server timed out waiting for the request.");
       case 409:
         return ServerFailure(
-            "Conflict: There was a conflict with the current state of the resource.");
+            errorMessage:
+                "Conflict: There was a conflict with the current state of the resource.");
       case 410:
         return ServerFailure(
-            "Gone: The requested resource is no longer available.");
+            errorMessage:
+                "Gone: The requested resource is no longer available.");
       case 411:
         return ServerFailure(
-            "Length Required: The 'Content-Length' header is missing or invalid.");
+            errorMessage:
+                "Length Required: The 'Content-Length' header is missing or invalid.");
       case 412:
         return ServerFailure(
-            "Precondition Failed: The server does not meet one of the preconditions specified in the request.");
+            errorMessage:
+                "Precondition Failed: The server does not meet one of the preconditions specified in the request.");
       case 413:
         return ServerFailure(
-            "Payload Too Large: The request payload exceeds the server's limits.");
+            errorMessage:
+                "Payload Too Large: The request payload exceeds the server's limits.");
       case 414:
         return ServerFailure(
-            "URI Too Long: The request URI exceeds the server's limits.");
+            errorMessage:
+                "URI Too Long: The request URI exceeds the server's limits.");
       case 415:
         return ServerFailure(
-            "Unsupported Media Type: The media type of the request is not supported.");
+            errorMessage:
+                "Unsupported Media Type: The media type of the request is not supported.");
       case 416:
         return ServerFailure(
-            "Range Not Satisfiable: The requested range is not satisfiable.");
+            errorMessage:
+                "Range Not Satisfiable: The requested range is not satisfiable.");
       case 417:
         return ServerFailure(
-            "Expectation Failed: The server cannot meet the requirements of the 'Expect' header.");
+            errorMessage:
+                "Expectation Failed: The server cannot meet the requirements of the 'Expect' header.");
       case 418:
-        return ServerFailure("I'm a Teapot: This request cannot be handled.");
+        return ServerFailure(
+            errorMessage: "I'm a Teapot: This request cannot be handled.");
       case 421:
         return ServerFailure(
-            "Misdirected Request: The request was directed at a server that is not able to produce a response.");
+            errorMessage:
+                "Misdirected Request: The request was directed at a server that is not able to produce a response.");
       case 422:
         return ServerFailure(
-            "Unprocessable Entity: The server understands the content type but cannot process the request.");
+            errorMessage:
+                "Unprocessable Entity: The server understands the content type but cannot process the request.");
       case 423:
         return ServerFailure(
-            "Locked: The resource is locked and cannot be accessed.");
+            errorMessage:
+                "Locked: The resource is locked and cannot be accessed.");
       case 424:
         return ServerFailure(
-            "Failed Dependency: The request failed due to a failed dependency.");
+            errorMessage:
+                "Failed Dependency: The request failed due to a failed dependency.");
       case 425:
         return ServerFailure(
-            "Unordered Collection: The server is unable to respond to the request.");
+            errorMessage:
+                "Unordered Collection: The server is unable to respond to the request.");
       case 426:
         return ServerFailure(
-            "Upgrade Required: The client must upgrade to a newer protocol.");
+            errorMessage:
+                "Upgrade Required: The client must upgrade to a newer protocol.");
       case 428:
         return ServerFailure(
-            "Precondition Required: The server requires the request to be conditional.");
+            errorMessage:
+                "Precondition Required: The server requires the request to be conditional.");
       case 429:
         return ServerFailure(
-            "Too Many Requests: Please slow down and try again later.");
+            errorMessage:
+                "Too Many Requests: Please slow down and try again later.");
       case 431:
         return ServerFailure(
-            "Request Header Fields Too Large: The request headers are too large.");
+            errorMessage:
+                "Request Header Fields Too Large: The request headers are too large.");
       case 451:
         return ServerFailure(
-            "Unavailable For Legal Reasons: Access to this resource is denied for legal reasons.");
+            errorMessage:
+                "Unavailable For Legal Reasons: Access to this resource is denied for legal reasons.");
       case 500:
-        return ServerFailure("Internal Server Error: Please try again later.");
+        return ServerFailure(
+            errorMessage: "Internal Server Error: Please try again later.");
       case 501:
         return ServerFailure(
-            "Not Implemented: The server does not support the functionality required to fulfill the request.");
+            errorMessage:
+                "Not Implemented: The server does not support the functionality required to fulfill the request.");
       case 502:
         return ServerFailure(
-            "Bad Gateway: The server received an invalid response from the upstream server.");
+            errorMessage:
+                "Bad Gateway: The server received an invalid response from the upstream server.");
       case 503:
-        return ServerFailure("Service Unavailable: Please try again later.");
+        return ServerFailure(
+            errorMessage: "Service Unavailable: Please try again later.");
       case 504:
-        return ServerFailure("Gateway Timeout: Please try again later.");
+        return ServerFailure(
+            errorMessage: "Gateway Timeout: Please try again later.");
       case 505:
         return ServerFailure(
-            "HTTP Version Not Supported: The server does not support the HTTP protocol version.");
+            errorMessage:
+                "HTTP Version Not Supported: The server does not support the HTTP protocol version.");
       case 506:
         return ServerFailure(
-            "Variant Also Negotiates: The server has an internal configuration error.");
+            errorMessage:
+                "Variant Also Negotiates: The server has an internal configuration error.");
       case 507:
         return ServerFailure(
-            "Insufficient Storage: The server is unable to store the representation needed to complete the request.");
+            errorMessage:
+                "Insufficient Storage: The server is unable to store the representation needed to complete the request.");
       case 508:
         return ServerFailure(
-            "Loop Detected: The server detected an infinite loop while processing the request.");
+            errorMessage:
+                "Loop Detected: The server detected an infinite loop while processing the request.");
       case 510:
         return ServerFailure(
-            "Not Extended: Further extensions to the request are required.");
+            errorMessage:
+                "Not Extended: Further extensions to the request are required.");
       case 511:
         return ServerFailure(
-            "Network Authentication Required: The client must authenticate with the network before accessing the resource.");
+            errorMessage:
+                "Network Authentication Required: The client must authenticate with the network before accessing the resource.");
       default:
-        return ServerFailure("An unknown error occurred: Please try again.");
+        return ServerFailure(
+            errorMessage: "An unknown error occurred: Please try again.");
     }
   }
 }
+
+// class ServerFailure extends Failures {
+//   ServerFailure({required super.errorMessage});
+
+//   factory ServerFailure.fromDioError(DioException dioError) {
+//     switch (dioError.type) {
+//       case DioExceptionType.connectionTimeout:
+//         return ServerFailure(errorMessage: "Connection TimeOut");
+//       case DioExceptionType.sendTimeout:
+//         return ServerFailure(errorMessage: "Send TimeOut");
+//       case DioExceptionType.receiveTimeout:
+//         return ServerFailure(errorMessage: "Receive TimeOut");
+
+//       case DioExceptionType.badResponse:
+//         return ServerFailure.fromResponse(
+//             dioError.response!.statusCode!, dioError.response!);
+//       case DioExceptionType.cancel:
+//         return ServerFailure(errorMessage: "Request Canceled");
+
+//       case DioExceptionType.unknown:
+//         return ServerFailure(errorMessage: "No Internet Connection");
+
+//       default:
+//         return ServerFailure(errorMessage: "Something Went Wrong");
+//     }
+//   }
+
+//   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
+//     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+//       return ServerFailure(errorMessage: response.data[0]);
+//     } else if (statusCode == 404) {
+//       // 404 not found
+//       return ServerFailure(
+//           errorMessage: "Your Request Not Found Try Again Later");
+//     } else if (statusCode == 409) {
+//       // 409 conflict
+//       return ServerFailure(errorMessage: "Conflict Occurred");
+//     } else if (statusCode == 500) {
+//       // 500 internal server error
+//       return ServerFailure(
+//           errorMessage: "Internal Server Error , Try Again Later");
+//     } else if (statusCode == 422) {
+//       return ServerFailure(errorMessage: response.data['data'].toString());
+//     } else {
+//       return ServerFailure(errorMessage: "Something Went Wrong");
+//     }
+//   }
+// }

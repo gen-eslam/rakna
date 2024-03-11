@@ -25,7 +25,7 @@ class LocationRepoImpl extends LocationRepo {
       this.mapController.setMapController = mapController;
       return const Right(null);
     } catch (e) {
-      return Left(LocalFailures(e.toString()));
+      return Left(LocalFailures(errorMessage: e.toString()));
     }
   }
 
@@ -43,8 +43,12 @@ class LocationRepoImpl extends LocationRepo {
       );
 
       return const Right(null);
+    } on LocationServiceException catch (e) {
+      return Left(LocalFailures(errorMessage: e.toString()));
+    } on LocationPermissionException catch (e) {
+      return Left(LocalFailures(errorMessage: e.toString()));
     } catch (e) {
-      return Left(LocalFailures(e.toString()));
+      return Left(LocalFailures(errorMessage: e.toString()));
     }
   }
 
@@ -53,8 +57,12 @@ class LocationRepoImpl extends LocationRepo {
     try {
       locationService.checkAndRequestLocationPermission();
       return const Right(null);
+    } on LocationServiceException catch (e) {
+      return Left(LocalFailures(errorMessage: e.toString()));
+    } on LocationPermissionException catch (e) {
+      return Left(LocalFailures(errorMessage: e.toString()));
     } catch (e) {
-      return Left(LocalFailures(e.toString()));
+      return Left(LocalFailures(errorMessage: e.toString()));
     }
   }
 
@@ -67,7 +75,11 @@ class LocationRepoImpl extends LocationRepo {
           long: locationService.locationData.longitude!);
       return const Right(null);
     } on LocationServiceException catch (e) {
-      return Left(LocalFailures(e.toString()));
+      return Left(LocalFailures(errorMessage: e.toString()));
+    } on LocationPermissionException catch (e) {
+      return Left(LocalFailures(errorMessage: e.toString()));
+    } catch (e) {
+      return Left(LocalFailures(errorMessage: e.toString()));
     }
   }
 }

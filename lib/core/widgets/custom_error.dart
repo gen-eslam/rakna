@@ -21,7 +21,8 @@ class CustomError extends StatelessWidget {
           SizedBox(height: 10.0.h),
           CustomText(
             text: errorMessage,
-            
+            textOverflow: TextOverflow.ellipsis,
+            maxLines: 10,
             style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10.0.h),

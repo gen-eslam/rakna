@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:rakna/core/services/cache_service.dart';
+import 'package:rakna/core/networking/end_point/rakna_end_point.dart';
 
 //Dio Helper That's Connect and Talk to API.
 class DioHelper {
@@ -13,34 +13,39 @@ class DioHelper {
     dio = Dio(
       BaseOptions(
         //Here the URL of API.
-        // baseUrl: EndPoints.baseUrl,
-        connectTimeout: const Duration(minutes: 2),
+        baseUrl: RaknaEndPoints.baseUrl,
+        connectTimeout: const Duration(minutes: 4),
         receiveDataWhenStatusError: true,
+
         //Here we Put The Headers Needed in The API.
         headers: {
-          'Content-Type': 'application/json',
+          'content-Type': "application/json: charset=utf-8",
+          'Accept': "*/*",
           "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-          //'lang':'en'
+          "transfer-encoding": "chunked",
+          "content-encoding": "gzip",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          'lang': 'en'
         },
       ),
     )..interceptors.addAll([
-        InterceptorsWrapper(
-          onRequest: (options, handle) async {
-            options.headers['Authorization'] =
-                'Bearer ${CacheService.getDataString(key: 'token')}';
-            return handle.next(options);
-          },
-          onError: (error, handle) {
-            if (error.response!.data['message'] ==
-                    "You are not authenticated" &&
-                error.response!.statusCode == 401) {
-              CacheService.clearData();
-              // Get.offAllNamed(PageName.LOG_IN);
-            }
-            return handle.next(error);
-          },
-        ),
+        // InterceptorsWrapper(
+        //   onRequest: (options, handle) async {
+        //     // options.headers['Authorization'] =
+        //     //     'Bearer ${CacheService.getDataString(key: 'token')}';
+        //     return handle.next(options);
+        //   },
+        //   onError: (error, handle) {
+        //     if (error.response!.data['message'] ==
+        //             "You are not authenticated" &&
+        //         error.response!.statusCode == 401) {
+        //       CacheService.clearData();
+        //       // Get.offAllNamed(PageName.LOG_IN);
+        //     }
+        //     return handle.next(error);
+        //   },
+        // ),
+
         PrettyDioLogger(
             requestHeader: true,
             requestBody: true,
@@ -79,9 +84,9 @@ class DioHelper {
     debugPrint("-------------Request Data----------------");
 
     try {
-      dio.options.headers = {
-        'Authorization': 'Bearer ${token ?? ''}',
-      };
+      // dio.options.headers = {
+      //   'Authorization': 'Bearer ${token ?? ''}',
+      // };
       final Response response = await dio.get(
         url,
         queryParameters: queryParameters,
@@ -92,7 +97,7 @@ class DioHelper {
       debugPrint('response is => ${response.data}');
       debugPrint("-------------Response Data----------------");
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("-------------Error Data----------------");
       debugPrint('error is => ${e.response!.data}');
       debugPrint("-------------Error Data----------------");
@@ -134,7 +139,7 @@ class DioHelper {
       debugPrint('response is => ${response.data}');
       debugPrint("-------------Response Data----------------");
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("-------------Error Data------------------");
       debugPrint('error is ${e.response!.data}');
       debugPrint("-------------Error Data------------------");

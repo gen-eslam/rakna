@@ -28,9 +28,7 @@ void main() async {
   ]);
   Bloc.observer = MyBlocObserver();
   PaymentApiHelper.init();
-
   dependencyInjectionSetup();
-
   runApp(const MyApp());
 }
 
@@ -56,7 +54,6 @@ class MyApp extends StatelessWidget {
                   ..getThemeMode(),
           ),
           BlocProvider(
-              // lazy: false,
               create: (context) => LocationCubit(
                   locationRepo: getIt.get<LocationRepoImpl>(),
                   settingRepo: getIt.get<SettingRepoImpl>())

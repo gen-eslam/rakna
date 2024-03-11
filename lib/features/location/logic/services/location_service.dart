@@ -38,29 +38,21 @@ class LocationService {
   }
 
   Future<void> getLocation() async {
-    await checkAndRequestLocationPermission();
+    await checkLocationServiceAndPermission();
     locationData = await _location.getLocation();
   }
 
   void getRealTimeLocation(void Function(LocationData)? onData) async {
-    await checkAndRequestLocationPermission();
+    await checkLocationServiceAndPermission();
 
     _location.onLocationChanged.listen(onData);
   }
 }
 
 class LocationServiceException implements Exception {
-
-  @override
-  String toString() {
-    return 'Service Not Enabled';
-  }
+ 
 }
 
 class LocationPermissionException implements Exception {
 
-  @override
-  String toString() {
-    return 'Permission Not Granted';
-  }
 }

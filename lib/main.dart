@@ -22,6 +22,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await CacheService.init();
   DioHelper.init();
+  PaymentApiHelper.init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

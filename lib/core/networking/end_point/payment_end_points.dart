@@ -1,10 +1,18 @@
 abstract class PaymentEndPoints {
   static const String baseUrl = 'https://accept.paymob.com/api/';
-  static const String apiKey =
-      "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RJNE5EQTFMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkua3JvaENrN1J0X19LMDhDWnlvNEFjRVloUnMwVUZ3R2FLdHJjSGJIQ3JqNTA5cGNIbFpqRkxpMjFiT3BxRjRpRTZMWnJYTEJENXlMRFdxelFYOHBFQ0E=";
-  static const String token = 'auth/tokens';
-  static const String createPayment = 'ecommerce/payment-links';
+  static const String authenticationRequest = 'auth/tokens';
+  static const String orderRegistration = 'ecommerce/orders';
+  static const String paymentKeyRquest = 'acceptance/payment_keys';
+
 }
+
+
+
+//https://docs.paymob.com/docs/accept-standard-redirect
+// {
+//   "username": "01551953697",
+//   "password": "Eslammohamed@1"
+// }
 // {
 //   "garageId": 0,
 //   "garageName": "el zahra",

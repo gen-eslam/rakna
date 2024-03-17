@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rakna/core/dependency_injection/dependency_injection.dart';
 import 'package:rakna/core/routing/page_name.dart';
-import 'package:rakna/features/auth/login/view/login_view.dart';
-import 'package:rakna/features/auth/sign_up/view/sign_up_view.dart';
+import 'package:rakna/features/auth/data/repo/auth_repo.dart';
+import 'package:rakna/features/auth/logic/auth_cubit/auth_cubit.dart';
+import 'package:rakna/features/auth/view/login_view.dart';
+import 'package:rakna/features/auth/view/sign_up_view.dart';
 import 'package:rakna/features/garage_details/view/garage_details_view.dart';
 import 'package:rakna/features/home_layout/view/home_layout_view.dart';
 import 'package:rakna/features/search/data/model/garage_model.dart';
@@ -22,11 +24,18 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: PageName.kLoginView,
-      builder: (context, state) => const LoginView(),
+      builder: (context, state) => BlocProvider(
+          create: (context) => AuthCubit(authRepo: getIt.get<AuthRepoImpl>()),
+          child: const LoginView()),
     ),
     GoRoute(
       path: PageName.kSignUpView,
-      builder: (context, state) => const SignUpView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => AuthCubit(
+          authRepo: getIt.get<AuthRepoImpl>(),
+        ),
+        child: const SignUpView(),
+      ),
     ),
     GoRoute(
       path: PageName.kHomeLayoutView,
@@ -61,7 +70,7 @@ abstract class AppRouter {
         page: BlocProvider(
           create: (context) =>
               SearchCubit(searchRepo: getIt.get<SearchRepoImpl>()),
-          child:  GarageDetailsView(garageModel:  state.extra as GarageModel),
+          child: GarageDetailsView(garageModel: state.extra as GarageModel),
         ),
       ),
     ),

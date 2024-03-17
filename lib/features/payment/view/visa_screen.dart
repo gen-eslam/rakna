@@ -53,19 +53,8 @@ class _VisaScreenState extends State<VisaScreen> {
             ),
           )
         ]),
-        body: WebViewWidget(),
+        body: WebViewWidget(controller: controller),
       ),
-    );
-  }
-
-  JavascriptChannel _toasterJavascriptChannel(BuildContext context) {
-    return JavascriptChannel(
-      name: 'Toaster',
-      onMessageReceived: (JavascriptMessage message) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message.message)),
-        );
-      },
     );
   }
 

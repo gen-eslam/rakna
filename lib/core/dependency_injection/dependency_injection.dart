@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:rakna/features/auth/data/repo/auth_repo.dart';
 import 'package:rakna/features/location/logic/services/location_service.dart';
 import 'package:rakna/core/services/setting/setting_repo/setting_repo.dart';
 import 'package:rakna/features/home_layout/data/home_layout_repo.dart';
@@ -19,4 +20,5 @@ void dependencyInjectionSetup() {
       locationService: getIt.get<LocationService>(),
       mapController: getIt.get<MapController>()));
   getIt.registerSingleton<SearchRepoImpl>(SearchRepoImpl());
+  getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl());
 }

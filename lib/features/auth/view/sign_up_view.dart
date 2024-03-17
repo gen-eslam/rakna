@@ -8,7 +8,7 @@ import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_elevated_button.dart';
 import 'package:rakna/core/widgets/custom_text.dart';
-import 'package:rakna/features/auth/sign_up/view/widgets/sign_up_form_section.dart';
+import 'package:rakna/features/auth/view/widgets/sign_up_form_section.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});

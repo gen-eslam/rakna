@@ -10,7 +10,7 @@ import 'package:rakna/core/utils/space_Manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_elevated_button.dart';
 import 'package:rakna/core/widgets/custom_text.dart';
-import 'package:rakna/features/auth/login/view/widgets/login_form_section.dart';
+import 'package:rakna/features/auth/view/widgets/login_form_section.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({

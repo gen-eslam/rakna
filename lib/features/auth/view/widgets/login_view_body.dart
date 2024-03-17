@@ -10,6 +10,7 @@ import 'package:rakna/core/utils/space_Manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_elevated_button.dart';
 import 'package:rakna/core/widgets/custom_text.dart';
+import 'package:rakna/features/auth/logic/auth_cubit/auth_cubit.dart';
 import 'package:rakna/features/auth/view/widgets/login_form_section.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -51,8 +52,10 @@ class LoginViewBody extends StatelessWidget {
           ),
           CustomElevatedButton(
             onPressed: () {
-              // ThemeCubit.get(context).changeTheme();
-              context.push(PageName.kHomeLayoutView);
+              if (AuthCubit.get(context).formKey.currentState!.validate()) {
+                print(AuthCubit.get(context).formKey.currentState!.validate());
+                context.push(PageName.kHomeLayoutView);
+              }
             },
             child: CustomText(
               text: StringManager.signIn,

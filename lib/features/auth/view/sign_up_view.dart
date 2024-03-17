@@ -2,12 +2,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rakna/core/helper/extensions.dart';
-import 'package:rakna/core/routing/page_name.dart';
 import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_elevated_button.dart';
 import 'package:rakna/core/widgets/custom_text.dart';
+import 'package:rakna/features/auth/data/model/register_model.dart';
+import 'package:rakna/features/auth/logic/auth_cubit/auth_cubit.dart';
 import 'package:rakna/features/auth/view/widgets/sign_up_form_section.dart';
 
 class SignUpView extends StatelessWidget {
@@ -26,6 +27,7 @@ class SignUpView extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   StringManager.signUp,
@@ -40,7 +42,28 @@ class SignUpView extends StatelessWidget {
                   height: context.deviceHeight * 0.030,
                 ),
                 CustomElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (AuthCubit.get(context)
+                        .formKey
+                        .currentState!
+                        .validate()) {
+                      AuthCubit.get(context).register(
+                        registerModel: RegisterModel(
+                            userName:
+                                AuthCubit.get(context).userNameController.text,
+                            nationalId: AuthCubit.get(context)
+                                .nationalityController
+                                .text,
+                            phoneNumber:
+                                AuthCubit.get(context).phoneController.text,
+                            email: AuthCubit.get(context).emailController.text,
+                            password:
+                                AuthCubit.get(context).passwordController.text,
+                            fullName:
+                                AuthCubit.get(context).userNameController.text),
+                      );
+                    }
+                  },
                   child: CustomText(
                     text: StringManager.signUp,
                     style: TextStyleManager.textStyle15w500,

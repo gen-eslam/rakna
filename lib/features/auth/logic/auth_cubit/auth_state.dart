@@ -12,3 +12,4 @@ class AuthError extends AuthState {
   final String error;
   AuthError(this.error);
 }
+class AuthChangeVisability extends AuthState {}

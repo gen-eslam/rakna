@@ -25,7 +25,11 @@ class AuthRepoImpl implements AuthRepo {
     } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     } catch (e) {
-      return Left(LocalFailures(errorMessage: e.toString()));
+      return Left(
+        LocalFailures(
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 
@@ -35,11 +39,19 @@ class AuthRepoImpl implements AuthRepo {
     try {
       var result = await DioHelper.postData(
           url: RaknaEndPoints.singUp, data: registerModel.toJson());
-      return Right(AuthModel.fromJson(result.data));
+      return Right(
+        AuthModel.fromJson(result.data),
+      );
     } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
+      return Left(
+        ServerFailure.fromDioError(e),
+      );
     } catch (e) {
-      return Left(LocalFailures(errorMessage: e.toString()));
+      return Left(
+        LocalFailures(
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 }

@@ -21,12 +21,14 @@ abstract class StringManager {
   // Sign Up
   static const String signUp = "Sign Up";
   static const String userName = "User Name";
+  static const String fullName = "Full Name";
   static const String enterYourLicensePlate = "Enter your license plate ";
   static const String phoneNumber = "Phone Number";
   static const String nationalId = "National Id";
   static const String plateNumbers = "Plate Numbers";
   static const String plateCharacters = "Plate Characters";
   static const String alreadyHaveAccount = "Already have an account? ";
+  static const String setPassword = "Set Password";
   // LOCATION VIEW
   static const String nearestLocation = "Nearest Location";
   static const String searchByCity = "Search by City";

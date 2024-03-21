@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rakna/core/helper/keys.dart';
 import 'package:rakna/core/routing/page_name.dart';
+import 'package:rakna/core/services/cache_service.dart';
 
 import 'package:rakna/features/splash/view/widgets/splash_view_body.dart';
 
@@ -27,7 +29,11 @@ class _SplashViewState extends State<SplashView>
         CurvedAnimation(parent: animationController, curve: Curves.linear));
     animationController.forward();
     Future.delayed(const Duration(milliseconds: 3000), () {
-      context.push(PageName.kLoginView);
+      if (CacheService.getDataString(key: Keys.token) != null) {
+        context.go(PageName.kHomeLayoutView);
+      } else {
+        context.push(PageName.kLoginView);
+      }
     });
     super.initState();
   }

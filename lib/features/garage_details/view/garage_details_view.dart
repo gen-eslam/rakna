@@ -12,8 +12,6 @@ class GarageDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(garageModel.latitude);
-    print(garageModel.longitude);
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),

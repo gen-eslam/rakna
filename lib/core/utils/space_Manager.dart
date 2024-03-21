@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppPadding {
+  static double p4 = 4.0.r;
   static double p8 = 8.0.r;
   static double p12 = 12.0.r;
   static double p16 = 16.0.r;

@@ -10,7 +10,7 @@ abstract class ThemeApp {
         brightness: Brightness.light,
         useMaterial3: false,
         fontFamily: GoogleFonts.aBeeZee().fontFamily,
-
+        
         // app bar theme
         appBarTheme: AppBarTheme(
           

@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:rakna/core/dependency_injection/dependency_injection.dart';
 import 'package:rakna/core/routing/page_name.dart';
 import 'package:rakna/features/auth/data/repo/auth_repo.dart';
-import 'package:rakna/features/auth/logic/auth_cubit/auth_cubit.dart';
+import 'package:rakna/features/auth/logic/login_cubit/login_cubit.dart';
+import 'package:rakna/features/auth/logic/register_cubit/register_cubit.dart';
 import 'package:rakna/features/auth/view/login_view.dart';
 import 'package:rakna/features/auth/view/sign_up_view.dart';
 import 'package:rakna/features/garage_details/view/garage_details_view.dart';
@@ -25,13 +26,13 @@ abstract class AppRouter {
     GoRoute(
       path: PageName.kLoginView,
       builder: (context, state) => BlocProvider(
-          create: (context) => AuthCubit(authRepo: getIt.get<AuthRepoImpl>()),
+          create: (context) => LogInCubit(authRepo: getIt.get<AuthRepoImpl>()),
           child: const LoginView()),
     ),
     GoRoute(
       path: PageName.kSignUpView,
       builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(
+        create: (context) => RegisterCubit(
           authRepo: getIt.get<AuthRepoImpl>(),
         ),
         child: const SignUpView(),

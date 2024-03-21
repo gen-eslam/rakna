@@ -1,104 +1,53 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rakna/core/helper/enums.dart';
 import 'package:rakna/core/helper/extensions.dart';
-import 'package:rakna/core/theme/manager/colors_manager.dart';
-import 'package:rakna/core/theme/manager/text_style_manager.dart';
-import 'package:rakna/core/utils/string_manager.dart';
-import 'package:rakna/core/widgets/custom_elevated_button.dart';
-import 'package:rakna/core/widgets/custom_text.dart';
-import 'package:rakna/features/auth/data/model/register_model.dart';
-import 'package:rakna/features/auth/logic/auth_cubit/auth_cubit.dart';
-import 'package:rakna/features/auth/view/widgets/sign_up_form_section.dart';
+import 'package:rakna/core/routing/page_name.dart';
+
+import 'package:rakna/core/widgets/custom_snak_bar.dart';
+
+import 'package:rakna/features/auth/logic/register_cubit/register_cubit.dart';
+
+import 'package:rakna/features/auth/view/widgets/password_Screen.dart';
+import 'package:rakna/features/auth/view/widgets/sign_up_details_screen.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
+  final List<Widget> screens = const [
+    SignUpDetailsScreen(),
+    PasswordScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return BlocListener<RegisterCubit, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            customSnackBar(text: state.message, colorState: ColorState.sucess),
+          );
+          context.go(PageName.kHomeLayoutView);
+        } else if (state is RegisterError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            customSnackBar(text: state.error, colorState: ColorState.failure),
+          );
+        }
+      },
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: context.deviceWidth * 0.05,
-            vertical: context.deviceHeight * 0.04,
-          ),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  StringManager.signUp,
-                  style: TextStyleManager.textStyle30w700
-                      .copyWith(color: context.theme.primaryColor),
-                ),
-                SizedBox(
-                  height: context.deviceHeight * 0.050,
-                ),
-                const SignUpFormSection(),
-                SizedBox(
-                  height: context.deviceHeight * 0.030,
-                ),
-                CustomElevatedButton(
-                  onPressed: () {
-                    if (AuthCubit.get(context)
-                        .formKey
-                        .currentState!
-                        .validate()) {
-                      AuthCubit.get(context).register(
-                        registerModel: RegisterModel(
-                            userName:
-                                AuthCubit.get(context).userNameController.text,
-                            nationalId: AuthCubit.get(context)
-                                .nationalityController
-                                .text,
-                            phoneNumber:
-                                AuthCubit.get(context).phoneController.text,
-                            email: AuthCubit.get(context).emailController.text,
-                            password:
-                                AuthCubit.get(context).passwordController.text,
-                            fullName:
-                                AuthCubit.get(context).userNameController.text),
-                      );
-                    }
-                  },
-                  child: CustomText(
-                    text: StringManager.signUp,
-                    style: TextStyleManager.textStyle15w500,
-                    color: ColorsManager.white,
-                  ),
-                ),
-                SizedBox(
-                  height: context.deviceHeight * 0.030,
-                ),
-                Align(
-                  alignment: AlignmentDirectional.center,
-                  child: RichText(
-                      text: TextSpan(
-                          text: StringManager.alreadyHaveAccount,
-                          style: TextStyleManager.textStyle15w400.copyWith(
-                            color: context.isDarkMode
-                                ? ColorsManager.white
-                                : ColorsManager.black,
-                          ),
-                          children: [
-                        TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                context.pop();
-                              },
-                            text: StringManager.signIn,
-                            style: TextStyleManager.textStyle15w700.copyWith(
-                              color: context.theme.primaryColor,
-                            ))
-                      ])),
-                )
-              ],
+            padding: EdgeInsets.symmetric(
+              horizontal: context.deviceWidth * 0.05,
+              vertical: context.deviceHeight * 0.04,
             ),
-          ),
-        ),
+            child: PageView.builder(
+                itemCount: 2,
+                controller: RegisterCubit.get(context).pageController,
+                allowImplicitScrolling: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return screens[index];
+                })),
       ),
     );
   }

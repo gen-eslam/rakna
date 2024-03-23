@@ -26,4 +26,8 @@ class GarageModel {
         longitude: json['longitude'] ?? "",
         latitude: json['latitude'] ?? "",
       );
+  @override
+  String toString() {
+    return "$garageId \n $avilableSpace \n $address\n $city\n $latitude\n $longitude\n";
+  }
 }

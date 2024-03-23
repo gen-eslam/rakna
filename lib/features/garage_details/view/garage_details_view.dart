@@ -19,14 +19,28 @@ class GarageDetailsView extends StatelessWidget {
       ),
       body: Column(children: [
         GarageDetails(garageModel: garageModel),
-        SizedBox(
+        Container(
           height: 300.h,
-          width: double.infinity,
+          width: MediaQuery.of(context).size.width * 0.9,
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.r),
+          ),
           child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                  zoom: 17,
-                  target: LatLng(double.tryParse(garageModel.latitude) ?? 0,
-                      double.tryParse(garageModel.longitude) ?? 0))),
+            zoomControlsEnabled: false,
+            markers: {
+              Marker(
+                markerId: const MarkerId("0"),
+                position: LatLng(double.tryParse(garageModel.longitude)!,
+                    double.tryParse(garageModel.latitude)!),
+              )
+            },
+            initialCameraPosition: CameraPosition(
+              zoom: 14,
+              target: LatLng(double.tryParse(garageModel.longitude)!,
+                  double.tryParse(garageModel.latitude)!),
+            ),
+          ),
         ),
       ]),
     );

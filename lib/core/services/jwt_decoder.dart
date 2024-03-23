@@ -2,6 +2,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 
 abstract class JwtDecoderService {
   static Map<String, dynamic> decode(String token) {
+    print(isExpired(token));
     return JwtDecoder.decode(token);
   }
 

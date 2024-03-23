@@ -5,7 +5,7 @@ abstract class RaknaEndPoints {
   static const String login = "/api/Auth/Login";
   static const String singUp = "/api/Auth/Register";
   static const String addVehicle = "/api/Driver/AddVehicle";
-  static const String reservation = "/api/Driver/Reservation";
-  static const String startParkingSession = "/Garage/StartParkingSession";
-  static const String endParkingSession = "/Garage/EndParkingSession";
+  static const String makeReservation = "/api/Driver/MakeReservation";
+  static const String getReservations = "/api/Driver/GetAllReservation";
+  static const String getDriverProfile = "/api/Driver/DriverProfileDetails";
 }

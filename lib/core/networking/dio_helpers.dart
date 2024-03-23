@@ -65,6 +65,9 @@ class DioHelper {
     String? token,
     Options? options,
   }) async {
+    dio.options.headers = {
+      'Authorization': 'Bearer ${token ?? ''}',
+    };
     // dio.options.headers = {
     //   'x-auth-token': token ?? '',
     //   'Content-Type': 'application/json',

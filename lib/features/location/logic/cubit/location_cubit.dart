@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:rakna/core/services/setting/setting_repo/setting_repo.dart';
 import 'package:rakna/features/location/data/location_repo.dart';
+import 'package:rakna/features/setting/logic/setting_repo/setting_repo.dart';
 
 part 'location_state.dart';
 

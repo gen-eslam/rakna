@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 import 'package:rakna/core/utils/space_Manager.dart';
 
 import 'package:rakna/features/home_layout/view/widgets/home_layout_bottom_nav_bar.dart';
@@ -10,6 +12,12 @@ class HomeLayoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeLayoutCubit cubit = HomeLayoutCubit.get(context);
+    // DioHelper.getData(
+    //   url: RaknaEndPoints.getDriverProfile,
+    //   token: CacheService.getDataString(key: Keys.token),
+    //   queryParameters: {"uid": DriverModel.getUid()},
+    // ).then((value) => print(value.data));
+   
 
     return SafeArea(
       child: Scaffold(

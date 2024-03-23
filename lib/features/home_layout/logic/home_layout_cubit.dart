@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/features/home/view/home_view.dart';
 import 'package:rakna/features/home_layout/data/home_layout_repo.dart';
-import 'package:rakna/features/location/view/location_view.dart';
 import 'package:rakna/features/setting/view/setting_view.dart';
 
 part 'home_layout_state.dart';

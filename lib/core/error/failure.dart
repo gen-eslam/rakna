@@ -42,11 +42,9 @@ class ServerFailure extends Failures {
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     switch (statusCode) {
       case 400:
-        return ServerFailure(
-            errorMessage: "Bad Request: ${response.data["message"]}");
+        return ServerFailure(errorMessage: "Bad Request: ${response.data}");
       case 401:
-        return ServerFailure(
-            errorMessage: "Unauthorized: ${response.data["message"]}");
+        return ServerFailure(errorMessage: "Unauthorized: ${response.data}");
       case 402:
         return ServerFailure(
             errorMessage:

@@ -3,7 +3,7 @@ import 'package:rakna/core/services/cache_service.dart';
 import 'package:rakna/core/services/jwt_decoder.dart';
 
 class DriverModel {
-  String? uid, fullName, email, phoneNumber, nationalId, userName;
+  String? uid, fullName, email, phoneNumber, nationalId;
 
   DriverModel(
       {this.uid,
@@ -11,7 +11,7 @@ class DriverModel {
       this.email,
       this.phoneNumber,
       this.nationalId,
-      this.userName});
+      });
 
   factory DriverModel.getDriver({required String token}) {
     Map<String, dynamic> data = JwtDecoderService.decode(token);
@@ -23,10 +23,12 @@ class DriverModel {
       phoneNumber: data["PhoneNumber"],
     );
   }
+  void getDriverDataApi({required Map<String, dynamic> data}) {
+     
+  }
   static String getUid() {
     Map<String, dynamic> data = JwtDecoderService.decode(
         CacheService.getDataString(key: Keys.token) ?? "");
-    print(data);
     return data["uid"];
   }
   

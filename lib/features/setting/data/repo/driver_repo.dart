@@ -24,7 +24,6 @@ class DriverRepoImpl implements DriverRepo {
     var result = await DioHelper.getData(
       url: RaknaEndPoints.getDriverProfile,
       token: CacheService.getDataString(key: Keys.token),
-      queryParameters: {"uid": DriverModel.getUid()},
     );
     print(result);
     return const Right({});

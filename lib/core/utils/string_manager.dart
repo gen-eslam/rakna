@@ -38,9 +38,11 @@ abstract class StringManager {
   static const String garages = "Garages";
   static const String garageDetails = "Garage Details";
   static const String garageName = "Garage Name";
-    static const String garageAddress = "Garage Address";
-    static const String hourPrice = "Hour Price";
-    static const String totalSpace = "Total Space";
-    static const String availableSpace = "Available Space";
-
+  static const String garageAddress = "Garage Address";
+  static const String hourPrice = "Hour Price";
+  static const String totalSpace = "Total Space";
+  static const String availableSpace = "Available Space";
+  static const String changeTheme = "Change Theme";
+  static const String makeComplaint = "Make a complaint";
+  static const String carPlates = "Car Plates";
 }

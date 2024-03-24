@@ -10,10 +10,9 @@ abstract class ThemeApp {
         brightness: Brightness.light,
         useMaterial3: false,
         fontFamily: GoogleFonts.aBeeZee().fontFamily,
-        
+
         // app bar theme
         appBarTheme: AppBarTheme(
-          
             centerTitle: true,
             elevation: 0,
             titleTextStyle: TextStyle(
@@ -48,7 +47,7 @@ abstract class ThemeApp {
           type: BottomNavigationBarType.fixed,
         ),
         indicatorColor: ColorsManager.bluishClr,
-        iconTheme: const IconThemeData(color: ColorsManager.bluishClr),
+        iconTheme: const IconThemeData(color: ColorsManager.black),
       );
   //dark theme
   static ThemeData dark(BuildContext context) => ThemeData(

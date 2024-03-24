@@ -3,15 +3,13 @@ import 'package:equatable/equatable.dart';
 class RegisterModel extends Equatable {
   final String fullName;
   final String nationalId;
-  final String userName;
   final String email;
   final String password;
-  final List<String> role = ["driver"];
+  final List<String> role = ["Driver"];
   final String phoneNumber;
   RegisterModel({
     required this.fullName,
     required this.nationalId,
-    required this.userName,
     required this.email,
     required this.password,
     required this.phoneNumber,
@@ -21,7 +19,7 @@ class RegisterModel extends Equatable {
     return {
       "fullName": fullName,
       "nationalId": nationalId,
-      "userName": userName,
+      "userName": "ffffffffff_ffffffffff",
       "email": email,
       "password": password,
       "role": role,
@@ -33,7 +31,6 @@ class RegisterModel extends Equatable {
   List<Object?> get props => [
         fullName,
         nationalId,
-        userName,
         email,
         password,
         role,

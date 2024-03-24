@@ -51,9 +51,10 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-            create: (context) =>
-                SettingCubit(settingRepo: getIt.get<SettingRepoImpl>(),driverRepo:getIt.get<DriverRepoImpl>() )
-                  ..getThemeMode(),
+            create: (context) => SettingCubit(
+                settingRepo: getIt.get<SettingRepoImpl>(),
+                driverRepo: getIt.get<DriverRepoImpl>())
+              ..getThemeMode(),
           ),
           BlocProvider(
               create: (context) => LocationCubit(
@@ -69,8 +70,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeApp.light(context),
             darkTheme: ThemeApp.dark(context),
-            themeMode: ThemeMode.dark,
-            // themeMode: SettingCubit.get(context).themeMode,
+            themeMode: SettingCubit.get(context).themeMode,
           );
         }),
       ),

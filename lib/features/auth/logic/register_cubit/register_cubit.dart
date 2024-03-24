@@ -1,8 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:fancy_password_field/fancy_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:rakna/core/helper/keys.dart';
 import 'package:rakna/core/services/cache_service.dart';
 import 'package:rakna/features/auth/data/model/Auth_model.dart';
@@ -50,7 +48,6 @@ class RegisterCubit extends Cubit<RegisterState> {
       registerModel: RegisterModel(
         fullName: _userNameController.text,
         nationalId: _nationalityController.text,
-        userName: _userNameController.text,
         email: _emailController.text,
         password: _passwordController.text,
         phoneNumber: _phoneController.text,

@@ -51,3 +51,14 @@ extension Validate on String {
     return phoneRegExp.hasMatch(this);
   }
 }
+
+
+// to convert from "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" to 'MM/dd/yyyy hh:mm a'
+
+// date = '2021-01-26T03:17:00.000000Z';
+// DateTime parseDate =
+//     new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(date);
+// var inputDate = DateTime.parse(parseDate.toString());
+// var outputFormat = DateFormat('MM/dd/yyyy hh:mm a');
+// var outputDate = outputFormat.format(inputDate);
+// print(outputDate)

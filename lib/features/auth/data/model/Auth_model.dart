@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 class AuthModel extends Equatable {
-  String message, token;
+  String? token;
+  String? message;
   bool isAuthenticated;
 
   AuthModel({
@@ -11,16 +12,16 @@ class AuthModel extends Equatable {
   });
 
   factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
-        message: json["message"],
-        token: json["token"],
-        isAuthenticated: json["success"],
+        message: json["Message"],
+        token: json["Token"],
+        isAuthenticated: json["IsAuthenticated"],
       );
 
   static Map<String, dynamic> logIn(
       {required String email, required String password}) {
     return {
-      "email": email,
-      "password": password,
+      "Email": email,
+      "Password": password,
     };
   }
 

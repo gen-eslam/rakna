@@ -5,7 +5,7 @@ class RegisterModel extends Equatable {
   final String nationalId;
   final String email;
   final String password;
-  final List<String> role = ["Driver"];
+  final List<String> role = ["driver"];
   final String phoneNumber;
   RegisterModel({
     required this.fullName,
@@ -17,13 +17,13 @@ class RegisterModel extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      "fullName": fullName,
-      "nationalId": nationalId,
-      "userName": "ffffffffff_ffffffffff",
-      "email": email,
-      "password": password,
-      "role": role,
-      "phoneNumber": phoneNumber,
+      "FullName": fullName,
+      "NationalId": nationalId,
+      "UserName": "ffffffffffffffffffff",
+      "Email": email,
+      "Password": password,
+      "Role": role,
+      "PhoneNumber": phoneNumber,
     };
   }
 

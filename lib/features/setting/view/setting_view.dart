@@ -99,11 +99,7 @@ class _SettingViewState extends State<SettingView> {
             ),
             CustomSettingCard(
               onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const CarPlatesWidet();
-                    });
+                context.push(PageName.kVehiclesView);
               },
               child: Row(
                 children: [
@@ -124,56 +120,56 @@ class _SettingViewState extends State<SettingView> {
   }
 }
 
-class CarPlatesWidet extends StatelessWidget {
-  const CarPlatesWidet({
-    super.key,
-  });
+// class CarPlatesWidet extends StatelessWidget {
+//   const CarPlatesWidet({
+//     super.key,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return Dialog.fullscreen(
-      backgroundColor: context.theme.scaffoldBackgroundColor,
-      child: Column(children: [
-        Padding(
-          padding: EdgeInsetsDirectional.all(10.r),
-          child: Row(
-            children: [
-              CustomText(
-                text: StringManager.carPlates,
-                textAlign: TextAlign.start,
-                style: TextStyleManager.textStyle18w600,
-              ),
-              const Spacer(),
-              IconButton(
-                icon: const Icon(Icons.add_circle_outline_rounded),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.close,
-                  color: ColorsManager.pinkClr,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ),
-        ...List.generate(
-          5,
-          (index) => Container(
-            width: context.deviceWidth,
-            margin: EdgeInsets.all(5.r),
-            color: ColorsManager.bluishClr.withOpacity(0.4),
-            padding: EdgeInsetsDirectional.all(10.r),
-            child: CustomText(
-              text: index.toString(),
-              textAlign: TextAlign.start,
-              style: TextStyleManager.textStyle18w600,
-            ),
-          ),
-        ),
-        const Spacer(),
-      ]),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Dialog.fullscreen(
+//       backgroundColor: context.theme.scaffoldBackgroundColor,
+//       child: Column(children: [
+//         Padding(
+//           padding: EdgeInsetsDirectional.all(10.r),
+//           child: Row(
+//             children: [
+//               CustomText(
+//                 text: StringManager.carPlates,
+//                 textAlign: TextAlign.start,
+//                 style: TextStyleManager.textStyle18w600,
+//               ),
+//               const Spacer(),
+//               IconButton(
+//                 icon: const Icon(Icons.add_circle_outline_rounded),
+//                 onPressed: () {},
+//               ),
+//               IconButton(
+//                 icon: const Icon(
+//                   Icons.close,
+//                   color: ColorsManager.pinkClr,
+//                 ),
+//                 onPressed: () {},
+//               ),
+//             ],
+//           ),
+//         ),
+//         ...List.generate(
+//           5,
+//           (index) => Container(
+//             width: context.deviceWidth,
+//             margin: EdgeInsets.all(5.r),
+//             color: ColorsManager.bluishClr.withOpacity(0.4),
+//             padding: EdgeInsetsDirectional.all(10.r),
+//             child: CustomText(
+//               text: index.toString(),
+//               textAlign: TextAlign.start,
+//               style: TextStyleManager.textStyle18w600,
+//             ),
+//           ),
+//         ),
+//         const Spacer(),
+//       ]),
+//     );
+//   }
+// }

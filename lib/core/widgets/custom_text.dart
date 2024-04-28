@@ -21,11 +21,10 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTextStyle(
       textAlign: textAlign,
-      maxLines:maxLines ,
+      maxLines: maxLines,
       style: TextStyle(
         color: context.isDarkMode ? Colors.white : Colors.black,
         overflow: textOverflow,
-        
       ),
       child: Text(
         text,

@@ -14,19 +14,17 @@ class HomeLayoutCubit extends Cubit<HomeLayoutState> {
   static HomeLayoutCubit get(context) =>
       BlocProvider.of<HomeLayoutCubit>(context);
   PageController pageController = PageController(
-    keepPage: true,
+    // keepPage: true,
     initialPage: 0,
   );
 
-/// appBarTitles
+  /// appBarTitles
   List<String> appBarTitles = [
     StringManager.home,
-    StringManager.qrCode,
     StringManager.settings,
   ];
   List screens = [
     const HomeView(),
-    const SettingView(),
     const SettingView(),
   ];
   int currentIndex = 0;

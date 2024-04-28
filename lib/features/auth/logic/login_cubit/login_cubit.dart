@@ -33,10 +33,10 @@ class LogInCubit extends Cubit<LogInState> {
 
   void isAuthenticated({required AuthModel authModel}) {
     if (authModel.isAuthenticated) {
-      saveToken(token: authModel.token);
-      emit(AuthSuccess(message: authModel.message));
+      saveToken(token: authModel.token!);
+      emit(AuthSuccess(message: "Login Success"));
     } else {
-      emit(AuthError(authModel.message));
+      emit(AuthError(authModel.message!));
     }
   }
 

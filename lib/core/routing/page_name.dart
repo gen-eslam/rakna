@@ -6,4 +6,8 @@ abstract class PageName {
   static const String kSearchView = "/searchView";
   static const String kSearchGarageView = "/SearchGarageView";
   static const String kGarageDetailsView = "/GarageDetailsView";
+  static const String kVisaScreen = "/visaScreen";
+  //VehiclesPage
+  static const String kVehiclesView = "/VehiclesView";
+  static const String kAddVehicleView = "/AddVehicleView";
 }

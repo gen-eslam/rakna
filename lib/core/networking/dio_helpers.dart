@@ -16,6 +16,7 @@ class DioHelper {
         baseUrl: RaknaEndPoints.baseUrl,
         connectTimeout: const Duration(minutes: 4),
         receiveDataWhenStatusError: true,
+        // receiveTimeout: null,
 
         //Here we Put The Headers Needed in The API.
         headers: {

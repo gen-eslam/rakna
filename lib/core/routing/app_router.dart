@@ -10,12 +10,16 @@ import 'package:rakna/features/auth/view/login_view.dart';
 import 'package:rakna/features/auth/view/sign_up_view.dart';
 import 'package:rakna/features/garage_details/view/garage_details_view.dart';
 import 'package:rakna/features/home_layout/view/home_layout_view.dart';
+import 'package:rakna/features/payment/view/pages/payment_ui.dart';
 import 'package:rakna/features/search/data/model/garage_model.dart';
 import 'package:rakna/features/search/data/repo/search_repo.dart';
 import 'package:rakna/features/search/logic/cubit/search_cubit.dart';
 import 'package:rakna/features/search/view/search_city_view.dart';
 import 'package:rakna/features/search/view/garages_view.dart';
 import 'package:rakna/features/splash/view/splash_view.dart';
+import 'package:rakna/features/vehicles/logic/vehicles_cubit.dart';
+import 'package:rakna/features/vehicles/view/pages/add_vehicles_screen.dart';
+import 'package:rakna/features/vehicles/view/pages/vehicles_page.dart';
 
 abstract class AppRouter {
   static final router = GoRouter(routes: [
@@ -74,6 +78,26 @@ abstract class AppRouter {
           child: GarageDetailsView(garageModel: state.extra as GarageModel),
         ),
       ),
+    ),
+    GoRoute(
+      path: PageName.kVisaScreen,
+      builder: (context, state) =>
+          PaymentPage(garageModel: state.extra as GarageModel),
+    ),
+    //kVehiclesView
+    GoRoute(
+      path: PageName.kVehiclesView,
+      pageBuilder: (context, state) => transitionFunction(
+        page: BlocProvider(
+          create: (context) => VehiclesCubit(),
+          child: const VehiclesPage(),
+        ),
+      ),
+    ),
+
+    GoRoute(
+      path: PageName.kAddVehicleView,
+      builder: (context, state) => const AddVehiclesScreen(),
     ),
   ]);
 }

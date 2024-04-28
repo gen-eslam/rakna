@@ -8,13 +8,13 @@ abstract class PaymentEndPoints {
 
 
 
-//https://docs.paymob.com/docs/accept-standard-redirect
+// https://docs.paymob.com/docs/accept-standard-redirect
 // {
 //   "username": "01551953697",
 //   "password": "Eslammohamed@1"
 // }
 // {
-//   "garageId": 0,
+ 
 //   "garageName": "el zahra",
 //   "hourPrice": 15,
 //   "street": "el-hussein",
@@ -25,7 +25,7 @@ abstract class PaymentEndPoints {
 //   "totalSpaces": 30,
 // }
 // {
-//   "garageId": 0,
+  
 //   "garageName": "el embator",
 //   "hourPrice": 30,
 //   "street": "el-madina el-monawara",
@@ -37,7 +37,7 @@ abstract class PaymentEndPoints {
 // }
 
 // {
-//   "garageId": 0,
+
 //   "garageName": "abo donia",
 //   "hourPrice": 30,
 //   "street": "shuhada rd",
@@ -48,7 +48,7 @@ abstract class PaymentEndPoints {
 //   "totalSpaces": 10
 // }
 // {
-//   "garageId": 0,
+
 //   "garageName": "el wensh",
 //   "hourPrice": 30,
 //   "street": "shuhada rd",

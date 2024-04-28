@@ -45,4 +45,5 @@ abstract class StringManager {
   static const String changeTheme = "Change Theme";
   static const String makeComplaint = "Make a complaint";
   static const String carPlates = "Car Plates";
+  static const String makeReservation = "Make Reservation";
 }

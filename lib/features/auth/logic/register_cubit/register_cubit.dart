@@ -16,7 +16,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   final AuthRepo authRepo;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-   final GlobalKey<FormState> _formPasswordKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formPasswordKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _nationalityController = TextEditingController();
@@ -24,7 +24,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
       TextEditingController();
-       final FancyPasswordController _fancyPasswordController = FancyPasswordController();
+  final FancyPasswordController _fancyPasswordController =
+      FancyPasswordController();
   final FancyPasswordController _fancyPasswordConfirmController =
       FancyPasswordController();
   GlobalKey<FormState> get formKey => _formKey;
@@ -36,10 +37,11 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController get passwordController => _passwordController;
   TextEditingController get passwordConfirmController =>
       _passwordConfirmController;
-  FancyPasswordController get fancyPasswordController => _fancyPasswordController;
+  FancyPasswordController get fancyPasswordController =>
+      _fancyPasswordController;
   FancyPasswordController get fancyPasswordConfirmController =>
       _fancyPasswordConfirmController;
-  
+
   PageController pageController = PageController();
 
   void register() async {
@@ -60,10 +62,12 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void isAuthenticated({required AuthModel authModel}) {
     if (authModel.isAuthenticated) {
-      saveToken(token: authModel.token);
-      emit(RegisterSuccess(message: authModel.message));
+      saveToken(token: authModel.token!);
+      emit(
+        RegisterSuccess(message: "Register Success"),
+      );
     } else {
-      emit(RegisterError(authModel.message));
+      emit(RegisterError(authModel.message!));
     }
   }
 

@@ -29,7 +29,8 @@ class SerchBar extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 elevation: 0,
               ),
-              onPressed: () {},
+              onPressed: () {
+              },
               child: CustomText(
                 text: StringManager.nearestLocation,
                 style: TextStyleManager.textStyle12w400,

@@ -12,13 +12,6 @@ class HomeLayoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeLayoutCubit cubit = HomeLayoutCubit.get(context);
-    // DioHelper.getData(
-    //   url: RaknaEndPoints.getDriverProfile,
-    //   token: CacheService.getDataString(key: Keys.token),
-    //   queryParameters: {"uid": DriverModel.getUid()},
-    // ).then((value) => print(value.data));
-   
-
     return SafeArea(
       child: Scaffold(
         // appBar: const HomeLayoutAppBar(),

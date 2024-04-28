@@ -1,7 +1,6 @@
 class GarageModel {
-  int garageId, avilableSpace, totalSpace;
+  num garageId, avilableSpace, totalSpace, hourPrice;
   String garageName, city, address, longitude, latitude;
-  double hourPrice;
 
   GarageModel({
     required this.garageId,
@@ -16,13 +15,13 @@ class GarageModel {
   });
 
   factory GarageModel.fromJson(Map<String, dynamic> json) => GarageModel(
-        garageId: json['garageId'] ?? 0,
-        garageName: json['garageName'] ?? "",
+        garageId: json['GarageId'] ?? 0,
+        garageName: json['GarageName'] ?? "",
         city: json['city'] ?? "",
         address: json['street'] ?? "",
-        hourPrice: json['hourPrice'] ?? 0.0,
-        avilableSpace: json['availableSpaces'] ?? 0,
-        totalSpace: json['totalSpaces'] ?? 0.0,
+        hourPrice: json['HourPrice'] ?? 0,
+        avilableSpace: json['AvailableSpaces'] ?? 0,
+        totalSpace: json['TotalSpaces'] ?? 0.0,
         longitude: json['longitude'] ?? "",
         latitude: json['latitude'] ?? "",
       );

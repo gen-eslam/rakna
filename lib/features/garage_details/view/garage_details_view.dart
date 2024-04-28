@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rakna/core/helper/extensions.dart';
+import 'package:rakna/core/routing/page_name.dart';
+import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_back_button.dart';
+import 'package:rakna/core/widgets/custom_elevated_button.dart';
+import 'package:rakna/core/widgets/custom_text.dart';
 import 'package:rakna/features/garage_details/view/widget/garage_details.dart';
 import 'package:rakna/features/search/data/model/garage_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GarageDetailsView extends StatelessWidget {
   final GarageModel garageModel;
@@ -20,7 +27,7 @@ class GarageDetailsView extends StatelessWidget {
       body: Column(children: [
         GarageDetails(garageModel: garageModel),
         Container(
-          height: 300.h,
+          height: context.deviceHeight * 0.35,
           width: MediaQuery.of(context).size.width * 0.9,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
@@ -41,6 +48,58 @@ class GarageDetailsView extends StatelessWidget {
                   double.tryParse(garageModel.latitude)!),
             ),
           ),
+        ),
+        const Spacer(),
+        Row(
+          children: [
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                child: CustomElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text(
+                                'Are you sure completed the reservation'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  context.push(PageName.kVisaScreen,
+                                      extra: garageModel);
+                                },
+                                child: const Text('Yes'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('No'),
+                              ),
+                            ],
+                          );
+                        });
+                  },
+                  child: CustomText(
+                    text: StringManager.makeReservation,
+                    style: TextStyleManager.textStyle18w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            IconButton(
+                onPressed: () async {
+                  if (await canLaunchUrl(Uri.parse(
+                      "https://www.google.com/maps/search/?api=1&query=${garageModel.latitude},${garageModel.longitude}"))) {
+                    await launchUrl(Uri.parse(
+                        "https://www.google.com/maps/search/?api=1&query=${garageModel.latitude},${garageModel.longitude}"));
+                  }
+                },
+                icon: const Icon(Icons.map_outlined)),
+          ],
         ),
       ]),
     );

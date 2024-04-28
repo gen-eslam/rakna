@@ -29,13 +29,6 @@ class HomeLayoutBottomNavBar extends StatelessWidget {
                 ),
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.account_balance_wallet),
-                title: CustomText(
-                  text: StringManager.qrCode,
-                  style: TextStyleManager.textStyle15w500,
-                ),
-              ),
-              SalomonBottomBarItem(
                 icon: const Icon(Icons.settings),
                 title: CustomText(
                   text: StringManager.settings,

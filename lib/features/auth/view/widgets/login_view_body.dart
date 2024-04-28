@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rakna/core/helper/enums.dart';
 import 'package:rakna/core/helper/extensions.dart';
+import 'package:rakna/core/helper/url_luncher.dart';
 import 'package:rakna/core/routing/page_name.dart';
 import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
@@ -68,9 +69,9 @@ class LoginViewBody extends StatelessWidget {
             SizedBox(
               height: AppSpace.s48.h,
             ),
-          
             CustomElevatedButton(
               onPressed: () {
+                // openEmailApp(context);
                 FocusScope.of(context).unfocus();
                 if (LogInCubit.get(context).formKey.currentState!.validate()) {
                   LogInCubit.get(context).login();

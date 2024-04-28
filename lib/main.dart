@@ -70,6 +70,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeApp.light(context),
             darkTheme: ThemeApp.dark(context),
+            themeAnimationCurve: Curves.easeInOutCubic,
+            themeAnimationDuration: const Duration(
+              milliseconds: 1000,
+            ),
             themeMode: SettingCubit.get(context).themeMode,
           );
         }),

@@ -10,4 +10,8 @@ abstract class PageName {
   //VehiclesPage
   static const String kVehiclesView = "/VehiclesView";
   static const String kAddVehicleView = "/AddVehicleView";
+  //ComplaintScreen
+  //OtpScreen
+  static const String kOtpScreen = "/OtpScreen";
+  static const String kComplaintView = "/ComplaintView";
 }

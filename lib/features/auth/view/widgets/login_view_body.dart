@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rakna/core/helper/enums.dart';
 import 'package:rakna/core/helper/extensions.dart';
-import 'package:rakna/core/helper/url_luncher.dart';
 import 'package:rakna/core/routing/page_name.dart';
 import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
@@ -14,7 +13,6 @@ import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_elevated_button.dart';
 import 'package:rakna/core/widgets/custom_snak_bar.dart';
 import 'package:rakna/core/widgets/custom_text.dart';
-import 'package:rakna/core/widgets/password_text_form_feild.dart';
 import 'package:rakna/features/auth/logic/login_cubit/login_cubit.dart';
 import 'package:rakna/features/auth/view/widgets/login_form_section.dart';
 
@@ -74,7 +72,10 @@ class LoginViewBody extends StatelessWidget {
                 // openEmailApp(context);
                 FocusScope.of(context).unfocus();
                 if (LogInCubit.get(context).formKey.currentState!.validate()) {
-                  LogInCubit.get(context).login();
+                  LogInCubit.get(context).login(
+                    email: LogInCubit.get(context).emailController.text,
+                    password: LogInCubit.get(context).passwordController.text,
+                  );
                 }
               },
               child: CustomText(

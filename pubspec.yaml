@@ -56,6 +56,9 @@ dependencies:
   webview_flutter: ^4.2.2
   web: 0.3.0
   flutter_paypal_payment: ^1.0.0
+  http: ^1.2.0
+  external_app_launcher: ^4.0.0
+  pinput: ^4.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

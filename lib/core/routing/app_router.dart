@@ -8,8 +8,10 @@ import 'package:rakna/features/auth/logic/login_cubit/login_cubit.dart';
 import 'package:rakna/features/auth/logic/register_cubit/register_cubit.dart';
 import 'package:rakna/features/auth/view/login_view.dart';
 import 'package:rakna/features/auth/view/sign_up_view.dart';
+import 'package:rakna/features/complaint/view/complaint_view.dart';
 import 'package:rakna/features/garage_details/view/garage_details_view.dart';
 import 'package:rakna/features/home_layout/view/home_layout_view.dart';
+import 'package:rakna/features/otp/view/otp_screen.dart';
 import 'package:rakna/features/payment/view/pages/payment_ui.dart';
 import 'package:rakna/features/search/data/model/garage_model.dart';
 import 'package:rakna/features/search/data/repo/search_repo.dart';
@@ -58,6 +60,7 @@ abstract class AppRouter {
         ),
       ),
     ),
+
     GoRoute(
       path: PageName.kSearchGarageView,
       pageBuilder: (context, state) => transitionFunction(
@@ -84,12 +87,20 @@ abstract class AppRouter {
       builder: (context, state) =>
           PaymentPage(garageModel: state.extra as GarageModel),
     ),
+    GoRoute(
+      path: PageName.kComplaintView,
+      builder: (context, state) => const ComplaintScreen(),
+    ),
     //kVehiclesView
+    GoRoute(
+      path: PageName.kOtpScreen,
+      builder: (context, state) => const OtpScreen(),
+    ),
     GoRoute(
       path: PageName.kVehiclesView,
       pageBuilder: (context, state) => transitionFunction(
         page: BlocProvider(
-          create: (context) => VehiclesCubit(),
+          create: (context) => VehiclesCubit()..filterVehicles(),
           child: const VehiclesPage(),
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:rakna/core/error/failure.dart';
 import 'package:rakna/core/helper/keys.dart';
 import 'package:rakna/core/networking/dio_helpers.dart';

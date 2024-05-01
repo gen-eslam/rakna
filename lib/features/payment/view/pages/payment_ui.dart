@@ -2,7 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
+import 'package:go_router/go_router.dart';
+import 'package:rakna/core/helper/enums.dart';
 import 'package:rakna/core/helper/keys.dart';
+import 'package:rakna/core/helper/url_luncher.dart';
+import 'package:rakna/core/routing/page_name.dart';
+import 'package:rakna/core/services/cache_service.dart';
+import 'package:rakna/core/widgets/custom_snak_bar.dart';
 import 'package:rakna/features/search/data/model/garage_model.dart';
 
 import '../../model/amount_model.dart';
@@ -17,6 +23,8 @@ class PaymentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(DateTime.now());
+
     var transactionData = getTransactionData();
 
     return Scaffold(
@@ -34,9 +42,19 @@ class PaymentPage extends StatelessWidget {
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) {
           log("onSuccess: $params");
-
-          Navigator.pop(context);
-          Navigator.pop(context);
+          makeReservation(
+                  token: CacheService.getDataString(key: Keys.token)!,
+                  garageId: garageModel.garageId as int)
+              .then((value) {
+            ScaffoldMessenger.of(context).showSnackBar(customSnackBar(
+                text: "Reservation created successfully",
+                colorState: ColorState.sucess));
+            context.go(PageName.kHomeLayoutView);
+          }).catchError((error) {
+            ScaffoldMessenger.of(context).showSnackBar(customSnackBar(
+                text: error.toString(), colorState: ColorState.failure));
+            Navigator.pop(context);
+          });
         },
         onError: (error) {
           log("onError: $error");

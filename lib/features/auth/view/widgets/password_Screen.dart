@@ -16,7 +16,7 @@ import 'package:rakna/features/auth/logic/register_cubit/register_cubit.dart';
 
 class PasswordScreen extends StatelessWidget {
   const PasswordScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,7 +29,10 @@ class PasswordScreen extends StatelessWidget {
                 customSnackBar(
                     text: state.message, colorState: ColorState.failure),
               );
-              context.go(PageName.kHomeLayoutView);
+              RegisterCubit.get(context).pageController.nextPage(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOutCubic,
+                  ); // context.go(PageName.kHomeLayoutView);
             } else if (state is RegisterError) {
               ScaffoldMessenger.of(context).showSnackBar(
                 customSnackBar(
@@ -94,13 +97,17 @@ class PasswordScreen extends StatelessWidget {
               ),
               CustomElevatedButton(
                 onPressed: () {
-                  FocusScope.of(context).unfocus();
-                  if (RegisterCubit.get(context)
-                      .formPasswordKey
-                      .currentState!
-                      .validate()) {
-                    RegisterCubit.get(context).register();
-                  }
+                  // FocusScope.of(context).unfocus();
+                  // if (RegisterCubit.get(context)
+                  //     .formPasswordKey
+                  //     .currentState!
+                  //     .validate()) {
+                  //   RegisterCubit.get(context).register();
+                  // }
+                  RegisterCubit.get(context).pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOutCubic,
+                      );
                 },
                 child: CustomText(
                   text: StringManager.signUp,

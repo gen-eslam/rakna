@@ -44,6 +44,10 @@ class SignUpDetailsScreen extends StatelessWidget {
                       curve: Curves.easeInOutCubic,
                     );
               }
+              // RegisterCubit.get(context).pageController.nextPage(
+              //       duration: const Duration(milliseconds: 500),
+              //       curve: Curves.easeInOutCubic,
+              //     );
             },
             child: CustomText(
               text: StringManager.setPassword,

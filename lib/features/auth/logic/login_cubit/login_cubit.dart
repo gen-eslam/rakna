@@ -22,12 +22,18 @@ class LogInCubit extends Cubit<LogInState> {
 
   TextEditingController get passwordController => _passwordController;
 
-  void login() async {
+  void login({required String email, required String password}) async {
     emit(AuthLoading());
-    var result = await authRepo.login(
-        email: _emailController.text, password: _passwordController.text);
-    result.fold((fail) => emit(AuthError(fail.errorMessage)), (sucess) {
-      isAuthenticated(authModel: sucess);
+    var result = await authRepo.login(email: email, password: password);
+    result.fold(
+        (fail) => emit(
+              AuthError(
+                fail.errorMessage,
+              ),
+            ), (sucess) {
+      isAuthenticated(
+        authModel: sucess,
+      );
     });
   }
 
@@ -48,6 +54,7 @@ class LogInCubit extends Cubit<LogInState> {
   Future<void> close() {
     _emailController.dispose();
     _passwordController.dispose();
+    
     return super.close();
   }
 }

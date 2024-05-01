@@ -11,12 +11,14 @@ import 'package:rakna/features/auth/logic/register_cubit/register_cubit.dart';
 
 import 'package:rakna/features/auth/view/widgets/password_Screen.dart';
 import 'package:rakna/features/auth/view/widgets/sign_up_details_screen.dart';
+import 'package:rakna/features/otp/view/otp_screen.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
   final List<Widget> screens = const [
     SignUpDetailsScreen(),
     PasswordScreen(),
+    OtpScreen(),
   ];
 
   @override
@@ -41,7 +43,7 @@ class SignUpView extends StatelessWidget {
               vertical: context.deviceHeight * 0.04,
             ),
             child: PageView.builder(
-                itemCount: 2,
+                itemCount: 3,
                 controller: RegisterCubit.get(context).pageController,
                 allowImplicitScrolling: true,
                 physics: const NeverScrollableScrollPhysics(),

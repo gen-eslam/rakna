@@ -10,17 +10,22 @@ class GarageTitleAndDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CustomText(
-          text: title,
-          style: TextStyleManager.textStyle18w600,
-          textOverflow: TextOverflow.ellipsis,
+        Expanded(
+          child: CustomText(
+            textAlign: TextAlign.start,
+            text: title,
+            style: TextStyleManager.textStyle18w600,
+            textOverflow: TextOverflow.ellipsis,
+          ),
         ),
-        CustomText(
-          text: details,
-          style: TextStyleManager.textStyle18w600,
-          textOverflow: TextOverflow.ellipsis,
+        Expanded(
+          child: CustomText(
+            text: details,
+            textAlign: TextAlign.end,
+            style: TextStyleManager.textStyle18w600,
+            textOverflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     );

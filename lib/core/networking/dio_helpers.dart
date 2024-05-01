@@ -20,7 +20,7 @@ class DioHelper {
 
         //Here we Put The Headers Needed in The API.
         headers: {
-          'content-Type': "application/json: charset=utf-8",
+          'content-Type': "application/json; charset=utf-8",
           'Accept': "*/*",
           "Access-Control-Allow-Origin": "*",
           "transfer-encoding": "chunked",
@@ -220,6 +220,7 @@ class DioHelper {
   static Future<Response> deleteData({
     required String url,
     Map<String, dynamic>? data,
+    Map<String, dynamic>? queryParameters,
     String? token,
     //String lang = 'en',
   }) async {
@@ -231,6 +232,7 @@ class DioHelper {
       };
       final Response response = await dio.delete(
         url,
+        queryParameters: queryParameters,
         data: data,
       );
       return response;

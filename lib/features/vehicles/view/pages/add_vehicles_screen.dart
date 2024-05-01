@@ -1,13 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rakna/core/helper/enums.dart';
 import 'package:rakna/core/helper/keys.dart';
 import 'package:rakna/core/networking/dio_helpers.dart';
 import 'package:rakna/core/routing/page_name.dart';
 import 'package:rakna/core/services/cache_service.dart';
-import 'package:rakna/core/theme/manager/colors_manager.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/widgets/custom_elevated_button.dart';
 import 'package:rakna/core/widgets/custom_snak_bar.dart';

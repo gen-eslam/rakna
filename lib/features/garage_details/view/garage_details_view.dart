@@ -57,30 +57,7 @@ class GarageDetailsView extends StatelessWidget {
                 margin: EdgeInsets.all(10.r),
                 child: CustomElevatedButton(
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text(
-                                'Are you sure completed the reservation'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  context.push(PageName.kVisaScreen,
-                                      extra: garageModel);
-                                },
-                                child: const Text('Yes'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('No'),
-                              ),
-                            ],
-                          );
-                        });
+                    context.push(PageName.kVisaScreen, extra: garageModel);
                   },
                   child: CustomText(
                     text: StringManager.makeReservation,
@@ -92,10 +69,16 @@ class GarageDetailsView extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () async {
-                  if (await canLaunchUrl(Uri.parse(
-                      "https://www.google.com/maps/search/?api=1&query=${garageModel.latitude},${garageModel.longitude}"))) {
-                    await launchUrl(Uri.parse(
-                        "https://www.google.com/maps/search/?api=1&query=${garageModel.latitude},${garageModel.longitude}"));
+                  if (await canLaunchUrl(
+                    Uri.parse(
+                      "https://www.google.com/maps/search/?api=1&query=${garageModel.latitude},${garageModel.longitude}",
+                    ),
+                  )) {
+                    await launchUrl(
+                      Uri.parse(
+                        "https://www.google.com/maps/search/?api=1&query=${garageModel.latitude},${garageModel.longitude}",
+                      ),
+                    );
                   }
                 },
                 icon: const Icon(Icons.map_outlined)),

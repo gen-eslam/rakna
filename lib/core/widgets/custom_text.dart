@@ -13,8 +13,8 @@ class CustomText extends StatelessWidget {
       required this.text,
       this.color,
       required this.style,
-      this.textOverflow,
-      this.maxLines,
+      this.textOverflow = TextOverflow.ellipsis,
+      this.maxLines = 1,
       this.textAlign = TextAlign.center});
 
   @override

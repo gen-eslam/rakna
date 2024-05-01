@@ -3,13 +3,18 @@ import 'package:equatable/equatable.dart';
 class VehiclesModel extends Equatable {
   String vehicleNumber;
   String vehicleLetter;
+  int? vehicleId;
 
-  VehiclesModel({required this.vehicleNumber, required this.vehicleLetter});
+  VehiclesModel(
+      {required this.vehicleNumber,
+      required this.vehicleLetter,
+      this.vehicleId});
 
   factory VehiclesModel.fromJson(Map<String, dynamic> json) {
     return VehiclesModel(
-      vehicleNumber: json['VehicleNumber'],
-      vehicleLetter: json['VehicleLetter'],
+      vehicleNumber: json['PlateNumber'],
+      vehicleId: json['Id'],
+      vehicleLetter: json['PlateLetter'],
     );
   }
 
@@ -22,7 +27,7 @@ class VehiclesModel extends Equatable {
 
   @override
   String toString() {
-    return 'VehiclesModel{vehicleNumber: $vehicleNumber, vehicleLetter: $vehicleLetter}';
+    return 'VehiclesModel{vehicleNumber: $vehicleNumber, vehicleLetter: $vehicleLetter, vehicleId: $vehicleId}';
   }
 
   @override

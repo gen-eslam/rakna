@@ -16,19 +16,26 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   final AuthRepo authRepo;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> _otpformKey = GlobalKey<FormState>();
+
   final GlobalKey<FormState> _formPasswordKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _nationalityController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  //pin 
+  final TextEditingController _pinController = TextEditingController();
+  
   final TextEditingController _passwordConfirmController =
       TextEditingController();
   final FancyPasswordController _fancyPasswordController =
       FancyPasswordController();
   final FancyPasswordController _fancyPasswordConfirmController =
       FancyPasswordController();
+      
   GlobalKey<FormState> get formKey => _formKey;
+  GlobalKey<FormState> get otpformKey => _otpformKey;
   GlobalKey<FormState> get formPasswordKey => _formPasswordKey;
   TextEditingController get emailController => _emailController;
   TextEditingController get userNameController => _userNameController;
@@ -41,6 +48,9 @@ class RegisterCubit extends Cubit<RegisterState> {
       _fancyPasswordController;
   FancyPasswordController get fancyPasswordConfirmController =>
       _fancyPasswordConfirmController;
+
+  //pin
+  TextEditingController get pinController => _pinController;
 
   PageController pageController = PageController();
 
@@ -62,7 +72,6 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void isAuthenticated({required AuthModel authModel}) {
     if (authModel.isAuthenticated) {
-      saveToken(token: authModel.token!);
       emit(
         RegisterSuccess(message: "Register Success"),
       );

@@ -46,4 +46,7 @@ abstract class StringManager {
   static const String makeComplaint = "Make a complaint";
   static const String carPlates = "Car Plates";
   static const String makeReservation = "Make Reservation";
+  //enterOtp
+  static const String enterOtp = "Enter OTP";
+  static const otpMessage = "An 6 digit code has been";
 }

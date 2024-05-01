@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rakna/core/helper/enums.dart';
+import 'package:rakna/core/helper/keys.dart';
+import 'package:rakna/core/networking/dio_helpers.dart';
 import 'package:rakna/core/routing/page_name.dart';
+import 'package:rakna/core/services/cache_service.dart';
 import 'package:rakna/core/theme/manager/colors_manager.dart';
+import 'package:rakna/core/widgets/custom_snak_bar.dart';
 
 import '../../logic/vehicles_cubit.dart';
 import '../widgets/custom_add_vehicle_icon.dart';
@@ -36,6 +41,7 @@ class VehiclesPage extends StatelessWidget {
               itemCount: state.vehicles.length,
               itemBuilder: (context, index) {
                 final vehicle = state.vehicles[index];
+                print(vehicle.toString());
                 return Dismissible(
                   direction: DismissDirection.endToStart,
                   background: Container(
@@ -45,11 +51,29 @@ class VehiclesPage extends StatelessWidget {
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
                   onDismissed: (direction) {
-                    //todo delete vehicle
+                    DioHelper.deleteData(
+                      url: "/api/Driver/DeleteVehicle",
+                      token: CacheService.getDataString(key: Keys.token),
+                      queryParameters: {
+                        "VehicleId": vehicle.vehicleId,
+                      },
+                    ).then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        customSnackBar(
+                            text: "Vehicle Deleted successfully",
+                            colorState: ColorState.sucess),
+                      );
+                    }).catchError((e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        customSnackBar(
+                            text: e.toString(), colorState: ColorState.failure),
+                      );
+                    });
                   },
-                  key: Key(index.toString()),
+                  key: Key(vehicle!.vehicleId.toString()),
                   child: ListTile(
-                    title: Text("Nick Name: ${vehicle!.vehicleNumber} ${vehicle.vehicleLetter}"),
+                    title: Text(
+                        "Vehicle : ${vehicle.vehicleNumber} ${vehicle.vehicleLetter}"),
                     trailing: const Icon(Icons.drag_handle),
                   ),
                 );

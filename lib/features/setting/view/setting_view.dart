@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rakna/core/helper/extensions.dart';
 import 'package:rakna/core/helper/keys.dart';
 import 'package:rakna/core/routing/page_name.dart';
 import 'package:rakna/core/services/cache_service.dart';
@@ -85,6 +84,9 @@ class _SettingViewState extends State<SettingView> {
               ),
             ),
             CustomSettingCard(
+              onTap: () {
+                context.push(PageName.kComplaintView);
+              },
               child: Row(
                 children: [
                   const Icon(Icons.support_agent_rounded),

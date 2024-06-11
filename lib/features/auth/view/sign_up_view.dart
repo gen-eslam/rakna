@@ -29,11 +29,16 @@ class SignUpView extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             customSnackBar(text: state.message, colorState: ColorState.sucess),
           );
-          context.go(PageName.kHomeLayoutView);
+          // context.go(PageName.kHomeLayoutView);
         } else if (state is RegisterError) {
           ScaffoldMessenger.of(context).showSnackBar(
             customSnackBar(text: state.error, colorState: ColorState.failure),
           );
+        } else if (state is EmailVerified) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            customSnackBar(text: state.message, colorState: ColorState.sucess),
+          );
+          context.go(PageName.kHomeLayoutView);
         }
       },
       child: Scaffold(
@@ -46,7 +51,7 @@ class SignUpView extends StatelessWidget {
                 itemCount: 3,
                 controller: RegisterCubit.get(context).pageController,
                 allowImplicitScrolling: true,
-                physics: const NeverScrollableScrollPhysics(),
+                // physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return screens[index];
                 })),

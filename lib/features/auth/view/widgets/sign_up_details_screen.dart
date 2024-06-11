@@ -37,12 +37,14 @@ class SignUpDetailsScreen extends StatelessWidget {
           ),
           CustomElevatedButton(
             onPressed: () {
-              FocusScope.of(context).unfocus();
               if (RegisterCubit.get(context).formKey.currentState!.validate()) {
-                RegisterCubit.get(context).pageController.nextPage(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOutCubic,
-                    );
+                FocusScope.of(context).unfocus();
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  RegisterCubit.get(context).pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOutCubic,
+                      );
+                });
               }
               // RegisterCubit.get(context).pageController.nextPage(
               //       duration: const Duration(milliseconds: 500),

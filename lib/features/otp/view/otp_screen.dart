@@ -83,16 +83,7 @@ class OtpScreen extends StatelessWidget {
                         .otpformKey
                         .currentState!
                         .validate()) {
-                      submit(otp: RegisterCubit.get(context).pinController.text)
-                          .then((value) {
-                        LogInCubit.get(context).login(
-                          email:
-                              RegisterCubit.get(context).emailController.text,
-                          password: RegisterCubit.get(context)
-                              .passwordController
-                              .text,
-                        );
-                      });
+                      RegisterCubit.get(context).verifyEmailAndLogin();
                     }
                   },
                   child: CustomText(
@@ -112,26 +103,5 @@ class OtpScreen extends StatelessWidget {
       //   child:
       // ),
     );
-  }
-}
-
-Future<void> submit({required String otp}) async {
-  var headersList = {
-    'Accept': '*/*',
-    'User-Agent': 'Thunder Client (https://www.thunderclient.com)'
-  };
-  var url = Uri.parse(
-      'https://raknaapi.azurewebsites.net/api/Auth/VerifyEmail?otp=$otp');
-
-  var req = http.Request('GET', url);
-  req.headers.addAll(headersList);
-
-  var res = await req.send();
-  final resBody = await res.stream.bytesToString();
-
-  if (res.statusCode >= 200 && res.statusCode < 300) {
-    print(resBody);
-  } else {
-    print(res.reasonPhrase);
   }
 }

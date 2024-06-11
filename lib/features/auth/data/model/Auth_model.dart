@@ -14,7 +14,7 @@ class AuthModel extends Equatable {
   factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
         message: json["Message"],
         token: json["Token"],
-        isAuthenticated: json["IsAuthenticated"],
+        isAuthenticated: json["Success"],
       );
 
   static Map<String, dynamic> logIn(

@@ -16,7 +16,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   final AuthRepo authRepo;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final GlobalKey<FormState> _otpformKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _otpformKey = GlobalKey<FormState>();
 
   final GlobalKey<FormState> _formPasswordKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
@@ -24,16 +24,16 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController _nationalityController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  //pin 
+  //pin
   final TextEditingController _pinController = TextEditingController();
-  
+
   final TextEditingController _passwordConfirmController =
       TextEditingController();
   final FancyPasswordController _fancyPasswordController =
       FancyPasswordController();
   final FancyPasswordController _fancyPasswordConfirmController =
       FancyPasswordController();
-      
+
   GlobalKey<FormState> get formKey => _formKey;
   GlobalKey<FormState> get otpformKey => _otpformKey;
   GlobalKey<FormState> get formPasswordKey => _formPasswordKey;
@@ -66,18 +66,27 @@ class RegisterCubit extends Cubit<RegisterState> {
       ),
     );
     result.fold((fail) => emit(RegisterError(fail.errorMessage)), (sucess) {
-      isAuthenticated(authModel: sucess);
+      emit(RegisterSuccess(
+          message: "Register Success , Please Verify Your Email"));
     });
   }
 
-  void isAuthenticated({required AuthModel authModel}) {
-    if (authModel.isAuthenticated) {
-      emit(
-        RegisterSuccess(message: "Register Success"),
-      );
-    } else {
-      emit(RegisterError(authModel.message!));
-    }
+  // void isAuthenticated({required AuthModel authModel}) {
+  //   if (authModel.isAuthenticated) {
+  //     emit();
+  //   } else {
+  //     emit(RegisterError(authModel.message!));
+  //   }
+  // }
+
+  Future<void> verifyEmailAndLogin() async {
+    emit(RegisterLoading());
+    var result = await authRepo.verifyEmail(otp: pinController.text);
+    result.fold((fail) => emit(RegisterError(fail.errorMessage)), (sucess) {
+      authRepo.login(
+          email: emailController.text, password: passwordController.text);
+      emit(EmailVerified(message: "Email Verified"));
+    });
   }
 
   void saveToken({required String token}) {

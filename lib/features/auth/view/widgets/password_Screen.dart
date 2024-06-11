@@ -25,18 +25,17 @@ class PasswordScreen extends StatelessWidget {
         child: BlocListener<RegisterCubit, RegisterState>(
           listener: (context, state) {
             if (state is RegisterSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                customSnackBar(
-                    text: state.message, colorState: ColorState.failure),
-              );
               RegisterCubit.get(context).pageController.nextPage(
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeInOutCubic,
-                  ); // context.go(PageName.kHomeLayoutView);
-            } else if (state is RegisterError) {
+                  );
+            }
+            if (state is RegisterError) {
               ScaffoldMessenger.of(context).showSnackBar(
                 customSnackBar(
-                    text: state.error, colorState: ColorState.failure),
+                  text: state.error,
+                  colorState: ColorState.failure,
+                ),
               );
             }
           },
@@ -49,8 +48,9 @@ class PasswordScreen extends StatelessWidget {
               CustomText(
                 text: StringManager.setPassword,
                 textAlign: TextAlign.start,
-                style: TextStyleManager.textStyle30w700
-                    .copyWith(color: context.theme.primaryColor),
+                style: TextStyleManager.textStyle30w700.copyWith(
+                  color: context.theme.primaryColor,
+                ),
               ),
               SizedBox(
                 height: context.deviceHeight * 0.05,
@@ -95,25 +95,25 @@ class PasswordScreen extends StatelessWidget {
               SizedBox(
                 height: context.deviceHeight * 0.10,
               ),
-              CustomElevatedButton(
-                onPressed: () {
-                  // FocusScope.of(context).unfocus();
-                  // if (RegisterCubit.get(context)
-                  //     .formPasswordKey
-                  //     .currentState!
-                  //     .validate()) {
-                  //   RegisterCubit.get(context).register();
-                  // }
-                  RegisterCubit.get(context).pageController.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOutCubic,
-                      );
+              BlocBuilder<RegisterCubit, RegisterState>(
+                builder: (context, state) {
+                  return CustomElevatedButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      if (RegisterCubit.get(context)
+                          .formPasswordKey
+                          .currentState!
+                          .validate()) {
+                        RegisterCubit.get(context).register();
+                      }
+                    },
+                    child: CustomText(
+                      text: StringManager.signUp,
+                      style: TextStyleManager.textStyle15w500,
+                      color: ColorsManager.white,
+                    ),
+                  );
                 },
-                child: CustomText(
-                  text: StringManager.signUp,
-                  style: TextStyleManager.textStyle15w500,
-                  color: ColorsManager.white,
-                ),
               ),
             ],
           ),

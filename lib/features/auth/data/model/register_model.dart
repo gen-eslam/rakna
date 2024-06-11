@@ -5,9 +5,9 @@ class RegisterModel extends Equatable {
   final String nationalId;
   final String email;
   final String password;
-  final List<String> role = ["driver"];
+  final String role = "driver";
   final String phoneNumber;
-  RegisterModel({
+  const RegisterModel({
     required this.fullName,
     required this.nationalId,
     required this.email,
@@ -19,7 +19,7 @@ class RegisterModel extends Equatable {
     return {
       "FullName": fullName,
       "NationalId": nationalId,
-      "UserName": "ffffffffffffffffffff",
+      "UserName": fullName,
       "Email": email,
       "Password": password,
       "Role": role,

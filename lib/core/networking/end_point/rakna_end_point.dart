@@ -4,6 +4,8 @@ abstract class RaknaEndPoints {
   static const String citys = "/Garage/Cities";
   static const String login = "/api/Auth/Login";
   static const String singUp = "/api/Auth/Register";
+  ///api/Auth/VerifyEmail
+  static const String verifyEmail = "/api/Auth/VerifyEmail";
   static const String addVehicle = "/api/Driver/AddVehicle";
   static const String makeReservation = "/api/Driver/MakeReservation";
   static const String getReservations = "/api/Driver/GetAllReservation";

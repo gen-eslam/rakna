@@ -75,18 +75,22 @@ class PasswordTextFormFeild extends StatelessWidget {
           children: List.generate(
             validationRules.length,
             (index) => Card(
-              color: ColorsManager.bluishClr.withOpacity(0.1),
+              color: ColorsManager.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Padding(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: ColorsManager.bluishClr)),
                 padding: EdgeInsets.all(AppPadding.p8),
                 child: CustomText(
-                    style: TextStyleManager.textStyle14w600,
-                    color: validationRules.elementAt(index).validate(value)
-                        ? ColorsManager.green
-                        : null,
-                    text: validationRules.elementAt(index).name),
+                  style: TextStyleManager.textStyle14w600,
+                  color: validationRules.elementAt(index).validate(value)
+                      ? ColorsManager.green
+                      : null,
+                  text: validationRules.elementAt(index).name,
+                ),
               ),
             ),
           ),

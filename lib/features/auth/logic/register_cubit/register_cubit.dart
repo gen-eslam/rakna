@@ -78,6 +78,33 @@ class RegisterCubit extends Cubit<RegisterState> {
   //     emit(RegisterError(authModel.message!));
   //   }
   // }
+    void login({required String email, required String password}) async {
+    emit(AuthLoading());
+    var result = await authRepo.login(email: email, password: password);
+    result.fold(
+        (fail) => emit(
+              AuthError(
+                fail.errorMessage,
+              ),
+            ), (sucess) {
+      isAuthenticated(
+        authModel: sucess,
+      );
+    });
+  }
+
+  void isAuthenticated({required AuthModel authModel}) {
+    if (authModel.isAuthenticated) {
+      saveToken(token: authModel.token!);
+      emit(AuthSuccess(message: "Login Success"));
+    } else {
+      emit(AuthError(authModel.message!));
+    }
+  }
+
+  void saveToken({required String token}) {
+    CacheService.put(key: Keys.token, value: token);
+  }
 
   Future<void> verifyEmailAndLogin() async {
     emit(RegisterLoading());
@@ -89,9 +116,6 @@ class RegisterCubit extends Cubit<RegisterState> {
     });
   }
 
-  void saveToken({required String token}) {
-    CacheService.put(key: Keys.token, value: token);
-  }
 
   @override
   Future<void> close() {

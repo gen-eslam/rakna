@@ -22,3 +22,17 @@ class RegisterError extends RegisterState {
   final String error;
   RegisterError(this.error);
 }
+// AuthSuccess
+
+class AuthSuccess extends RegisterState {
+  final String message;
+  AuthSuccess({required this.message});
+}
+
+class AuthError extends RegisterState {
+  final String error;
+  AuthError(this.error);
+}
+//AuthLoading
+
+class AuthLoading extends RegisterState {}

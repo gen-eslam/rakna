@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rakna/core/helper/extensions.dart';
+import 'package:rakna/core/helper/keys.dart';
+import 'package:rakna/core/helper/url_luncher.dart';
 import 'package:rakna/core/routing/page_name.dart';
+import 'package:rakna/core/services/cache_service.dart';
 import 'package:rakna/core/theme/manager/text_style_manager.dart';
 import 'package:rakna/core/utils/string_manager.dart';
 import 'package:rakna/core/widgets/custom_back_button.dart';
@@ -38,14 +43,24 @@ class GarageDetailsView extends StatelessWidget {
             markers: {
               Marker(
                 markerId: const MarkerId("0"),
-                position: LatLng(double.tryParse(garageModel.longitude)!,
-                    double.tryParse(garageModel.latitude)!),
+                position: LatLng(
+                    double.tryParse(
+                      garageModel.longitude,
+                    )!,
+                    double.tryParse(
+                      garageModel.latitude,
+                    )!),
               )
             },
             initialCameraPosition: CameraPosition(
               zoom: 14,
-              target: LatLng(double.tryParse(garageModel.longitude)!,
-                  double.tryParse(garageModel.latitude)!),
+              target: LatLng(
+                  double.tryParse(
+                    garageModel.longitude,
+                  )!,
+                  double.tryParse(
+                    garageModel.latitude,
+                  )!),
             ),
           ),
         ),
@@ -58,6 +73,10 @@ class GarageDetailsView extends StatelessWidget {
                 child: CustomElevatedButton(
                   onPressed: () {
                     context.push(PageName.kVisaScreen, extra: garageModel);
+                    //   makeReservation(
+                    //     token: CacheService.getDataString(key: Keys.token)!,
+                    //     garageId: garageModel.garageId as int,
+                    //   );
                   },
                   child: CustomText(
                     text: StringManager.makeReservation,

@@ -19,7 +19,7 @@ class RegisterModel extends Equatable {
     return {
       "FullName": fullName,
       "NationalId": nationalId,
-      "UserName": fullName,
+      "UserName": "fullName4450",
       "Email": email,
       "Password": password,
       "Role": role,

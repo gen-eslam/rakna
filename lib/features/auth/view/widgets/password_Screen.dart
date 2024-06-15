@@ -30,14 +30,6 @@ class PasswordScreen extends StatelessWidget {
                     curve: Curves.easeInOutCubic,
                   );
             }
-            if (state is RegisterError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                customSnackBar(
-                  text: state.error,
-                  colorState: ColorState.failure,
-                ),
-              );
-            }
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -32,7 +32,7 @@ class _SplashViewState extends State<SplashView>
       if (CacheService.getDataString(key: Keys.token) != null) {
         context.go(PageName.kHomeLayoutView);
       } else {
-        context.push(PageName.kLoginView);
+        context.go(PageName.kLoginView);
       }
     });
     super.initState();

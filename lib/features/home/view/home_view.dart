@@ -115,7 +115,7 @@ class HomeView extends StatelessWidget {
                 print("object");
               });
             });
-            
+
             return FutureBuilder(
                 future: DioHelper.getData(
                   url: "/api/Driver/RealTimeParkingSessions",

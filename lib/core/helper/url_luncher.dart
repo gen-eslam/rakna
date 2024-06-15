@@ -22,15 +22,16 @@ Future<void> makeReservation(
     'Accept': '*/*',
     'User-Agent': 'Thunder Client (https://www.thunderclient.com)',
     'Authorization': 'Bearer ',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $token',
   };
   var url = Uri.parse(
       'https://raknaapi.azurewebsites.net/api/Driver/MakeReservation');
 
   var body = {
-    "GarageId": 32,
+    "GarageId": 114,
     "dateTime":
-        "${DateTime.now().toString().split(" ")[0]}T${DateTime.now().toString().split(" ")[1].substring(0, 12)}Z"
+        "${DateTime.now().add(const Duration(hours: 100)).toString().split(" ")[0]}T${DateTime.now().add(const Duration(hours: 100)).toString().split(" ")[1].substring(0, 12)}Z"
   };
 
   var req = http.Request('POST', url);
@@ -41,8 +42,12 @@ Future<void> makeReservation(
   final resBody = await res.stream.bytesToString();
 
   if (res.statusCode >= 200 && res.statusCode < 300) {
-    print(resBody);
+    print("sssqqq$resBody");
+    print(
+        "sssqqq${DateTime.now().add(const Duration(hours: 1)).toString().split(" ")[0]}T${DateTime.now().add(const Duration(hours: 1)).toString().split(" ")[1].substring(0, 12)}Z");
   } else {
-    print(res.reasonPhrase);
+    print("sssqqq$resBody");
+    print(
+        "sssqqq${DateTime.now().add(const Duration(hours: 1)).toString().split(" ")[0]}T${DateTime.now().add(const Duration(hours: 1)).toString().split(" ")[1].substring(0, 12)}Z");
   }
 }

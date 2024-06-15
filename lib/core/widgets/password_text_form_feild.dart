@@ -75,7 +75,9 @@ class PasswordTextFormFeild extends StatelessWidget {
           children: List.generate(
             validationRules.length,
             (index) => Card(
-              color: ColorsManager.white,
+              color: context.isDarkMode
+                  ? ColorsManager.darkBlue
+                  : ColorsManager.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
